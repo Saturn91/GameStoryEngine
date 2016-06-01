@@ -12,6 +12,8 @@ public class GetToPosition extends Event{
 	
 	public GetToPosition(String name, int x, int y) {
 		super(name , "try to find this Position on the Map!");
+		this.x = x;
+		this.y = y;
 		transistion = new Transistion(this);
 	}
 	
