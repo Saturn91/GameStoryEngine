@@ -2,12 +2,12 @@ package GameEventEngine.EventEntities;
 
 import java.util.ArrayList;
 
-public class Event {
+public abstract class Event {
 	private static ArrayList<Long> usedIds = new ArrayList<>();
 	private static ArrayList<Event> events = new ArrayList<>();
 	private Event_Status status = Event_Status.INACTIVE;
 	private long id;
-	private String name;
+	protected String name;
 	private String description;
 	
 	public Event(String name, String description){
@@ -80,4 +80,14 @@ public class Event {
 		
 		return false;
 	}
+	
+	protected boolean isActive(){
+		return status.equals(Event_Status.ACTIVE);
+	}
+	
+	abstract public void addEventBefore(Event event);
+	
+	abstract public void update();
+	
+	
 }
