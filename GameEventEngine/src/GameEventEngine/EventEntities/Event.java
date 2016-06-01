@@ -1,0 +1,83 @@
+package GameEventEngine.EventEntities;
+
+import java.util.ArrayList;
+
+public class Event {
+	private static ArrayList<Long> usedIds = new ArrayList<>();
+	private static ArrayList<Event> events = new ArrayList<>();
+	private Event_Status status = Event_Status.INACTIVE;
+	private long id;
+	private String name;
+	private String description;
+	
+	public Event(String name, String description){
+		id = usedIds.size();
+		usedIds.add(id);
+		this.name = name;
+		this.description = description;
+		events.add(this);
+	}
+	
+	private Event_Status getStatus(){
+		return status;
+	}
+	
+	private void setStatus(Event_Status status){
+		this.status = status;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	
+	public String getDescription(){
+		return description;
+	}
+	
+	public static long getMaxID(){
+		return (long) usedIds.size()-1;
+	}
+	
+	public static Event getEventWithID(long id){
+		return events.get((int) id);
+	}
+	
+	public static Event getEventWithName(String name){
+		for(Event e: events){
+			if(e.getName().equals(name)){
+				return e;
+			}
+		}
+		System.err.println("Event: no Event called: " + name );
+		return null;
+	}
+	
+	public void clearIDs(){
+		usedIds.clear();
+	}
+	
+	public long getID(){
+		return id;
+	}
+	
+	public static boolean setEventStatus(String eventName, Event_Status status){
+		for(Event e: events){
+			if(e.getName().equals(eventName)){
+				e.setStatus(status);
+				return true;
+			}
+		}
+		System.err.println("no Event named: " + eventName);
+		return false;
+	}
+	
+	public static boolean isStatus(String eventname, Event_Status status){
+		for(Event e: events){
+			if(e.getName().equals(eventname) && e.getStatus().equals(status)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+}
