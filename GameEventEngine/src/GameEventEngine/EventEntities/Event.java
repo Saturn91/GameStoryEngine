@@ -38,11 +38,11 @@ public abstract class Event {
 		return (long) usedIds.size()-1;
 	}
 	
-	public static Event getEventWithID(long id){
+	public static Event getEventByID(long id){
 		return events.get((int) id);
 	}
 	
-	public static Event getEventWithName(String name){
+	public static Event getEventByName(String name){
 		for(Event e: events){
 			if(e.getName().equals(name)){
 				return e;

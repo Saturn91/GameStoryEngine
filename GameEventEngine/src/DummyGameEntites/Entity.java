@@ -1,6 +1,8 @@
 package DummyGameEntites;
 
 public class Entity {
-	public static int xPos;
-	public static int yPos;
+	public int xPos;
+	public int yPos;
+	public String name;
+	public boolean alive = true;
 }
