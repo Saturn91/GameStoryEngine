@@ -37,11 +37,8 @@ public class StoryManager {
 		}
 	}
 	
-	public void setPlayer(Player player){
-		
-	}
-	
 	public void printStatus(){
+		System.out.println("********************************************************");
 		for(Event e: eventList){
 			if(e.isStatus(e.getName(), Event_Status.ACTIVE)){
 				System.out.println(e.getName() + " is active");
@@ -51,6 +48,15 @@ public class StoryManager {
 			}
 			if(e.isStatus(e.getName(), Event_Status.INACTIVE)){
 				System.out.println(e.getName() + " is inactive");
+			}
+		}
+	}
+	
+	public void printActiveEvents(){
+		System.out.println("********************************************************");
+		for(Event e: eventList){
+			if(e.isStatus(e.getName(), Event_Status.ACTIVE)){
+				System.out.println(e.getName() + " is active");
 			}
 		}
 	}

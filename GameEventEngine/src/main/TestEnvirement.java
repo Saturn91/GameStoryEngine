@@ -31,21 +31,21 @@ public class TestEnvirement {
 		syma.update();
 		
 		//check
-		syma.printStatus();
+		syma.printActiveEvents();
 		
 		//Player moved
 		player.xPos = 100;
 		player.yPos = 200;
 		
 		syma.update();
-		syma.printStatus();
+		syma.printActiveEvents();
 		
 		//Player moved
 		player.xPos = 100;
 		player.yPos = 400;
 		
 		syma.update();
-		syma.printStatus();
+		syma.printActiveEvents();
 		
 		//kill creature
 		creature.alive = false;
