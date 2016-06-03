@@ -1,4 +1,4 @@
-package GameEventEngine.EventEntities;
+package GameEventEngine.Events.EventTypes;
 
 import java.util.ArrayList;
 
