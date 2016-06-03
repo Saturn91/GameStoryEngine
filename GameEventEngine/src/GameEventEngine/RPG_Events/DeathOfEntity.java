@@ -6,7 +6,6 @@ import GameEventEngine.EventEntities.Event_Status;
 import GameEventEngine.EventEntities.Transistion;
 
 public class DeathOfEntity extends Event{
-	private Transistion transistion;
 	private Entity entity;
 	
 	public DeathOfEntity(String name, Entity entity) {

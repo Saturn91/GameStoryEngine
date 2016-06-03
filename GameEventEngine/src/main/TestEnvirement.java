@@ -27,12 +27,15 @@ public class TestEnvirement {
 		syma.addEntityGetsToPosition("X1", player, 100, 400);
 		syma.addDeathOfEntity("you have to kill the creature", creature);
 		syma.addHasInInventory("GetTheDagger", player, thing);
+		syma.addEntityGetsToPosition("X2", creature, 100, 100);
 		
 		//all transitions
 		syma.addEventBefore("GetOutOfTheHole", Event.getEventByName("START"));
 		syma.addEventBefore("X1", Event.getEventByName("GetOutOfTheHole"));
 		syma.addEventBefore("you have to kill the creature", Event.getEventByName("X1"));
 		syma.addEventBefore("GetTheDagger", Event.getEventByName("you have to kill the creature"));
+		syma.addEventBeforeOR("GetTheDagger", Event.getEventByName("X2"), 1);
+		syma.addEventBefore("X2", Event.getEventByName("START"));
 		
 		//Start
 		syma.printStatus();
@@ -52,8 +55,14 @@ public class TestEnvirement {
 		syma.update();
 		syma.printActiveEvents();
 		
-		//kill creature
-		creature.kill();
+		//setPos creature
+		creature.setPosition(100, 100);
+		
+		syma.update();
+		syma.printActiveEvents();
+		
+		//don't kill creature
+		//creature.kill();
 		
 		syma.update();
 		syma.printActiveEvents();

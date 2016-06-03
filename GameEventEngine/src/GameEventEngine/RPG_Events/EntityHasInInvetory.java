@@ -6,7 +6,6 @@ import GameEventEngine.EventEntities.Event_Status;
 import GameEventEngine.EventEntities.Transistion;
 
 public class EntityHasInInvetory extends Event{
-	private Transistion transistion;
 	private Entity entity;
 	private Entity inInventory;
 	

@@ -17,6 +17,7 @@ public abstract class Event {
 		this.name = name;
 		this.description = description;
 		events.add(this);
+		transistion = new Transistion(this);
 	}
 	
 	private Event_Status getStatus(){
@@ -88,6 +89,10 @@ public abstract class Event {
 	
 	public void addEventBefore(Event event){
 		transistion.addEventBefore(event);
+	}
+	
+	public void addEventBeforeOR(Event event, int branch){
+		transistion.addEventBeforeOR(event, branch);
 	}
 	
 	abstract public void update();

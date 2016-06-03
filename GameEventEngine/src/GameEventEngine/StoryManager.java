@@ -36,6 +36,10 @@ public class StoryManager {
 		Event.getEventByName(name).addEventBefore(event);
 	}
 	
+	public void addEventBeforeOR(String name, Event event, int branch){
+		Event.getEventByName(name).addEventBeforeOR(event, branch);
+	}
+	
 	public void update(){
 		for(Event e: eventList){
 			e.update();
