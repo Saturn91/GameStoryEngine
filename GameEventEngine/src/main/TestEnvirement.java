@@ -54,8 +54,4 @@ public class TestEnvirement {
 		syma.printStatus();
 				
 	}
-	
-	public static Player getPlayer(){
-		return player;
-	}
 }

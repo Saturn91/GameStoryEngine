@@ -19,8 +19,7 @@ public class StoryManager {
 	}
 	
 	public void addEntityGetsToPosition(String name, Entity entity, int x, int y){
-		EntityGetsToPosition gtp = new EntityGetsToPosition(name, x, y);
-		gtp.setEntity(entity);
+		EntityGetsToPosition gtp = new EntityGetsToPosition(name, entity, x, y);
 		eventList.add(gtp);
 	}
 	

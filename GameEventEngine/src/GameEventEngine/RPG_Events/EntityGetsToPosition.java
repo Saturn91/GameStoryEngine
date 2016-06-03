@@ -12,10 +12,11 @@ public class EntityGetsToPosition extends Event{
 	private Transistion transistion;
 	private Entity entity;
 	
-	public EntityGetsToPosition(String name, int x, int y) {
+	public EntityGetsToPosition(String name, Entity entity, int x, int y) {
 		super(name , "try to find this Position on the Map!");
 		this.x = x;
 		this.y = y;
+		this.entity = entity;
 		transistion = new Transistion(this);
 	}
 	
@@ -35,11 +36,4 @@ public class EntityGetsToPosition extends Event{
 		}
 		transistion.update();
 	}
-	
-	public void setEntity(Entity entity){
-		this.entity = entity;
-	}
-	
-	
-
 }
