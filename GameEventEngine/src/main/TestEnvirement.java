@@ -1,5 +1,6 @@
 package main;
 
+import DummyGameEntites.Creature;
 import DummyGameEntites.Entity;
 import DummyGameEntites.Player;
 import DummyGameEntites.Thing;
@@ -8,7 +9,7 @@ import GameEventEngine.EventEntities.Event;
 
 public class TestEnvirement {
 	private static Player player;
-	private static Entity creature;
+	private static Creature creature;
 	private static Thing thing;
 	/**
 	 * aplication Launcher
@@ -16,7 +17,7 @@ public class TestEnvirement {
 	 */
 	public static void main(String[] args){
 		player = new Player();
-		creature = new Entity("Creature");
+		creature = new Creature("Creature");
 		thing = new Thing("Dagger");
 		creature.addToInventory(thing.getID());
 		
@@ -59,8 +60,6 @@ public class TestEnvirement {
 		
 		//take dagger from creature
 		player.addToInventory(creature.takefromInventory(thing.getID()).getID());
-		thing.setToContainer(true);
-		thing.addToInventory(Entity.getIdOff(player.getName()));
 		
 		syma.update();
 		syma.printStatus();
