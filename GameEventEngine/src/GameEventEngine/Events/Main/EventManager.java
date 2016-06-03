@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import DummyGameEntites.Entity;
 import DummyGameEntites.Player;
-import GameEventEngine.Events.EventTypes.Event;
-import GameEventEngine.Events.EventTypes.Event_Status;
-import GameEventEngine.Events.RPG_Events.DeathOfEntity;
-import GameEventEngine.Events.RPG_Events.EntityGetsToPosition;
-import GameEventEngine.Events.RPG_Events.EntityHasInInvetory;
-import GameEventEngine.Events.RPG_Events.StartEvent;
+import GameEventEngine.Events.Event.Event;
+import GameEventEngine.Events.Event.Event_Status;
+import GameEventEngine.Events.EventTypes.DeathOfEntity;
+import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
+import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
+import GameEventEngine.Events.EventTypes.StartEvent;
 
 public class EventManager {
 	ArrayList<Event> eventList = new ArrayList<>();

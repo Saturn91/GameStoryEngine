@@ -1,9 +1,9 @@
-package GameEventEngine.Events.RPG_Events;
+package GameEventEngine.Events.EventTypes;
 
 import DummyGameEntites.Entity;
-import GameEventEngine.Events.EventTypes.Event;
-import GameEventEngine.Events.EventTypes.Event_Status;
-import GameEventEngine.Events.EventTypes.Transistion;
+import GameEventEngine.Events.Event.Event;
+import GameEventEngine.Events.Event.Event_Status;
+import GameEventEngine.Events.Event.Transistion;
 
 public class DeathOfEntity extends Event{
 	private Entity entity;

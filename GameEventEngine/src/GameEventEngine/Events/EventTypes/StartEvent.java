@@ -1,7 +1,7 @@
-package GameEventEngine.Events.RPG_Events;
+package GameEventEngine.Events.EventTypes;
 
-import GameEventEngine.Events.EventTypes.Event;
-import GameEventEngine.Events.EventTypes.Event_Status;
+import GameEventEngine.Events.Event.Event;
+import GameEventEngine.Events.Event.Event_Status;
 
 public class StartEvent extends Event{
 

@@ -4,22 +4,29 @@ import java.util.ArrayList;
 
 import DummyGameEntites.Entity;
 import DummyGameEntites.Player;
-import GameEventEngine.Events.EventTypes.Event;
-import GameEventEngine.Events.EventTypes.Event_Status;
+import GameEventEngine.Actions.Main.ActionManager;
+import GameEventEngine.Events.Event.Event;
+import GameEventEngine.Events.Event.Event_Status;
+import GameEventEngine.Events.EventTypes.DeathOfEntity;
+import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
+import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
+import GameEventEngine.Events.EventTypes.StartEvent;
 import GameEventEngine.Events.Main.EventManager;
-import GameEventEngine.Events.RPG_Events.DeathOfEntity;
-import GameEventEngine.Events.RPG_Events.EntityGetsToPosition;
-import GameEventEngine.Events.RPG_Events.EntityHasInInvetory;
-import GameEventEngine.Events.RPG_Events.StartEvent;
 
 public class StoryManager {
 	private EventManager evma;
+	private ActionManager acma;
 	
 	public StoryManager() {
 		evma = new EventManager();
+		acma = new ActionManager();
 	}
 	
 	public EventManager getEventManager(){
 		return evma;
+	}
+	
+	public ActionManager getActionManager(){
+		return acma;
 	}
 }

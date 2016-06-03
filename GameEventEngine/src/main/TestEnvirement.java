@@ -5,7 +5,7 @@ import DummyGameEntites.Entity;
 import DummyGameEntites.Player;
 import DummyGameEntites.Thing;
 import GameEventEngine.StoryManager;
-import GameEventEngine.Events.EventTypes.Event;
+import GameEventEngine.Events.Event.Event;
 
 public class TestEnvirement {
 	private static Player player;
