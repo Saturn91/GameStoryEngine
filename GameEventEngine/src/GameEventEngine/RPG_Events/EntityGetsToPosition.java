@@ -9,7 +9,6 @@ import GameEventEngine.EventEntities.Transistion;
 public class EntityGetsToPosition extends Event{
 	private int x;
 	private int y;
-	private Transistion transistion;
 	private Entity entity;
 	
 	public EntityGetsToPosition(String name, Entity entity, int x, int y) {
@@ -18,11 +17,6 @@ public class EntityGetsToPosition extends Event{
 		this.y = y;
 		this.entity = entity;
 		transistion = new Transistion(this);
-	}
-	
-	@Override
-	public void addEventBefore(Event event){
-		transistion.addEventBefore(event);
 	}
 	
 	@Override

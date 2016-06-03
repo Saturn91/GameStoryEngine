@@ -3,6 +3,7 @@ package GameEventEngine.EventEntities;
 import java.util.ArrayList;
 
 public abstract class Event {
+	protected Transistion transistion;
 	private static ArrayList<Long> usedIds = new ArrayList<>();
 	private static ArrayList<Event> events = new ArrayList<>();
 	private Event_Status status = Event_Status.INACTIVE;
@@ -85,7 +86,9 @@ public abstract class Event {
 		return status.equals(Event_Status.ACTIVE);
 	}
 	
-	abstract public void addEventBefore(Event event);
+	public void addEventBefore(Event event){
+		transistion.addEventBefore(event);
+	}
 	
 	abstract public void update();
 	

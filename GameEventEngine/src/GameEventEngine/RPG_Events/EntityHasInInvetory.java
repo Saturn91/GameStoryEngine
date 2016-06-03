@@ -18,11 +18,6 @@ public class EntityHasInInvetory extends Event{
 	}
 	
 	@Override
-	public void addEventBefore(Event event){
-		transistion.addEventBefore(event);
-	}
-	
-	@Override
 	public void update(){
 		if(isActive() && entity.hasinInventory(inInventory.getID())){
 			EntityHasInInvetory.setEventStatus(name, Event_Status.DONE);

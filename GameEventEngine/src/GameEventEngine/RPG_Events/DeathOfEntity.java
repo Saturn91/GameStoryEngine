@@ -16,11 +16,6 @@ public class DeathOfEntity extends Event{
 	}
 	
 	@Override
-	public void addEventBefore(Event event){
-		transistion.addEventBefore(event);
-	}
-	
-	@Override
 	public void update(){
 		if(isActive() &! entity.isAlive()){
 			DeathOfEntity.setEventStatus(name, Event_Status.DONE);
