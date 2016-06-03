@@ -23,55 +23,44 @@ public class TestEnvirement {
 		
 		StoryManager syma = new StoryManager();
 		//all Events
-		syma.getEventManager().addEntityGetsToPosition("GetOutOfTheHole", player, 100, 200);
-		syma.getEventManager().addEntityGetsToPosition("X1", player, 100, 400);
-		syma.getEventManager().addDeathOfEntity("you have to kill the creature", creature);
-		syma.getEventManager().addHasInInventory("GetTheDagger", player, thing);
-		syma.getEventManager().addEntityGetsToPosition("X2", creature, 100, 100);
+		syma.getEventManager().addEntityGetsToPosition("X1", player, 100, 100);
+		syma.getEventManager().addDeathOfEntity("X2", creature);
+		syma.getEventManager().addEntityGetsToPosition("X3", player, 200, 200);
 		
 		//all transitions
-		syma.getEventManager().addEventBefore("GetOutOfTheHole", Event.getEventByName("START"));
-		syma.getEventManager().addEventBefore("X1", Event.getEventByName("GetOutOfTheHole"));
-		syma.getEventManager().addEventBefore("you have to kill the creature", Event.getEventByName("X1"));
-		syma.getEventManager().addEventBefore("GetTheDagger", Event.getEventByName("you have to kill the creature"));
-		syma.getEventManager().addEventBeforeOR("GetTheDagger", Event.getEventByName("X2"), 1);
-		syma.getEventManager().addEventBefore("X2", Event.getEventByName("START"));
+		syma.getEventManager().addEventBefore("X1", Event.getEventByName("START"));
+		syma.getEventManager().addEventBefore("X2", Event.getEventByName("X1"));
+		syma.getEventManager().addEventBefore("X3", Event.getEventByName("X2"));
 		
-		//Start
-		syma.getEventManager().printStatus();
-		syma.getEventManager().update();
+		//all actions
+		syma.getActionManager().addKill(creature, Event.getEventByName("X2"));
 		
-		syma.getEventManager().printActiveEvents();
+	//Start
+		syma.printStatus();
+		//X1 gets active
+		syma.update();
 		
-		//Player moved
-		player.setPosition(100, 200);
+		syma.printStatusActiveEvents();
 		
-		syma.getEventManager().update();
-		syma.getEventManager().printActiveEvents();
+	//Player moved
+		player.setPosition(100, 100);
+		//X1 -> done, X2 -> active, Creature dies (because X2 is active)
+		syma.update();		
 		
-		//Player moved
-		player.setPosition(100, 400);
+		syma.printStatusActiveEvents();
 		
-		syma.getEventManager().update();
-		syma.getEventManager().printActiveEvents();
+	//Creature is Dead!
+		//X2 -> done, X3 -> active
+		syma.update();
 		
-		//setPos creature
-		creature.setPosition(100, 100);
+		syma.printStatusActiveEvents();
 		
-		syma.getEventManager().update();
-		syma.getEventManager().printActiveEvents();
+	//Player moves
+		player.setPosition(200, 200);
+		//X3 -> done
+		syma.update();
 		
-		//don't kill creature
-		//creature.kill();
-		
-		syma.getEventManager().update();
-		syma.getEventManager().printActiveEvents();
-		
-		//take dagger from creature
-		player.addToInventory(creature.takefromInventory(thing.getID()).getID());
-		
-		syma.getEventManager().update();
-		syma.getEventManager().printStatus();
+		syma.printStatus();
 				
 	}
 }

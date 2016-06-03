@@ -95,6 +95,10 @@ public abstract class Event {
 		transistion.addEventBeforeOR(event, branch);
 	}
 	
+	public boolean isStatus(Event_Status status){
+		return status.equals(status);
+	}
+	
 	abstract public void update();
 	
 	

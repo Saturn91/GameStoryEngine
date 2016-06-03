@@ -14,6 +14,7 @@ import GameEventEngine.Events.EventTypes.StartEvent;
 import GameEventEngine.Events.Main.EventManager;
 
 public class StoryManager {
+	public static boolean testing = false;
 	private EventManager evma;
 	private ActionManager acma;
 	
@@ -28,5 +29,27 @@ public class StoryManager {
 	
 	public ActionManager getActionManager(){
 		return acma;
+	}
+	
+	public void update(){
+		//update status (Events)
+		evma.update();
+		
+		//modify gameWorld with actions
+		acma.update();
+	}
+	
+	public void printStatus(){
+		evma.printStatus();
+		acma.printStatus();
+	}
+	
+	public void printStatusActiveEvents(){
+		evma.printActiveEvents();
+		acma.printStatus();
+	}
+	
+	public static void setTesting(boolean ttesting){
+		testing = ttesting;
 	}
 }
