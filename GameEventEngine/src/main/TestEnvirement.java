@@ -59,6 +59,8 @@ public class TestEnvirement {
 		
 		//take dagger from creature
 		player.addToInventory(creature.takefromInventory(thing.getID()).getID());
+		thing.setToContainer(true);
+		thing.addToInventory(Entity.getIdOff(player.getName()));
 		
 		syma.update();
 		syma.printStatus();
