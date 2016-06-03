@@ -31,7 +31,7 @@ public class EntityGetsToPosition extends Event{
 			System.err.println("please set an entity -> GetToPosition");
 			System.exit(0);
 		}
-		if(isActive() && entity.xPos == x && entity.yPos == y){
+		if(isActive() && entity.getX() == x && entity.getY() == y){
 			EntityGetsToPosition.setEventStatus(name, Event_Status.DONE);
 		}
 		transistion.update();

@@ -8,6 +8,7 @@ import GameEventEngine.EventEntities.Event;
 import GameEventEngine.EventEntities.Event_Status;
 import GameEventEngine.RPG_Events.DeathOfEntity;
 import GameEventEngine.RPG_Events.EntityGetsToPosition;
+import GameEventEngine.RPG_Events.EntityHasInInvetory;
 import GameEventEngine.RPG_Events.StartEvent;
 
 public class StoryManager {
@@ -25,6 +26,10 @@ public class StoryManager {
 	
 	public void addDeathOfEntity(String name, Entity entity){
 		eventList.add(new DeathOfEntity(name, entity));
+	}
+	
+	public void addHasInInventory(String name, Entity entity, Entity inInventory){
+		eventList.add(new EntityHasInInvetory(name, entity, inInventory));
 	}
 	
 	public void addEventBefore(String name, Event event){
