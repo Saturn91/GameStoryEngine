@@ -1,6 +1,6 @@
 package GameEventEngine.Events.EventTypes;
 
-import DummyGameEntites.Entity;
+import Entites.Entity;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.Event.Transistion;

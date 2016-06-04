@@ -1,4 +1,4 @@
-package DummyGameEntites;
+package Entites;
 
 public class Creature extends Entity{
 	public Creature(String name, int Level) {

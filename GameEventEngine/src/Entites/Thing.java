@@ -1,4 +1,4 @@
-package DummyGameEntites;
+package Entites;
 
 public class Thing extends Entity{
 	boolean isContainer = false;

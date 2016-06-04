@@ -1,4 +1,4 @@
-package DummyGameEntites;
+package Entites;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class Entity {
 	protected Status status;
 	
 	public Entity(String name){
-		status = new Status();
+		status = new Status(name);
 		this.name = name;
 		alive = true;
 		id = entitys.size();		

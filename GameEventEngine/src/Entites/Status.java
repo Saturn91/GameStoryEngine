@@ -1,14 +1,19 @@
-package DummyGameEntites;
+package Entites;
 
 import java.util.ArrayList;
 
 public class Status {
+	private String entityName;
 	private ArrayList<Integer> integers = new ArrayList<>();
 	private ArrayList<String>  integerNames = new ArrayList<>();
 	private ArrayList<Boolean> booleans = new ArrayList<>();
 	private ArrayList<String>  booleanNames = new ArrayList<>();
 	private ArrayList<String>  strings = new ArrayList<>();
 	private ArrayList<String>  stringNames = new ArrayList<>();
+	
+	public Status(String entityName){
+		this.entityName = entityName;
+	}
 	
 	public void addInteger(String name, int value){
 		if(!integerNames.contains(name)){
@@ -93,5 +98,25 @@ public class Status {
 	
 	public enum Type{
 		BOOL, INT, STRING;
+	}
+	
+	public void debug(){
+		System.out.println("============================Debug: " + entityName + "============================");
+		System.out.println("=========Integers=========");
+		for(int i = 0; i < integers.size(); i++){
+			System.out.println(integerNames.get(i) + ":   " + integers.get(i));
+		}
+		
+		System.out.println("=========Booleans=========");
+		for(int i = 0; i < booleans.size(); i++){
+			System.out.println(booleanNames.get(i) + ":   " + booleans.get(i));
+		}
+		
+		System.out.println("=========Strings=========");
+		for(int i = 0; i < booleans.size(); i++){
+			System.out.println(stringNames.get(i) + ":   " + strings.get(i));
+		}
+		System.out.println("============================Debug: " + entityName + "/END========================");
+		
 	}
 }

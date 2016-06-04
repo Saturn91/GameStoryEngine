@@ -1,7 +1,7 @@
 package GameEventEngine.Events.EventTypes;
 
-import DummyGameEntites.Entity;
-import DummyGameEntites.Player;
+import Entites.Entity;
+import Entites.Player;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.Event.Transistion;

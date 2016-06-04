@@ -2,8 +2,8 @@ package GameEventEngine;
 
 import java.util.ArrayList;
 
-import DummyGameEntites.Entity;
-import DummyGameEntites.Player;
+import Entites.Entity;
+import Entites.Player;
 import GameEventEngine.Actions.Main.ActionManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;

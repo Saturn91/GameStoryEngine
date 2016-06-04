@@ -1,4 +1,4 @@
-package DummyGameEntites;
+package Entites;
 
 public class Player extends Creature{
 

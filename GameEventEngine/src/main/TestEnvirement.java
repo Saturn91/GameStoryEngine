@@ -1,9 +1,9 @@
 package main;
 
-import DummyGameEntites.Creature;
-import DummyGameEntites.Entity;
-import DummyGameEntites.Player;
-import DummyGameEntites.Thing;
+import Entites.Creature;
+import Entites.Entity;
+import Entites.Player;
+import Entites.Thing;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Events.Event.Event;
 
@@ -58,7 +58,12 @@ public class TestEnvirement {
 		//X3 -> done
 		syma.update();
 		
+	//End
 		syma.printStatus();
+		
+		//get all stats of Player and Creature using the new .debug()
+		player.status().debug();
+		creature.status().debug();
 				
 	}
 }

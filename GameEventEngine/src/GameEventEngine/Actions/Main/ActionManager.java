@@ -2,7 +2,7 @@ package GameEventEngine.Actions.Main;
 
 import java.util.ArrayList;
 
-import DummyGameEntites.Creature;
+import Entites.Creature;
 import GameEventEngine.ActionTypes.Kill;
 import GameEventEngine.Actions.Action.Action;
 import GameEventEngine.Events.Event.Event;
