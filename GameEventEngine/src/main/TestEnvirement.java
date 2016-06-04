@@ -5,6 +5,7 @@ import Entites.Entity;
 import Entites.Player;
 import Entites.Thing;
 import GameEventEngine.StoryManager;
+import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;
 
 public class TestEnvirement {
@@ -16,54 +17,40 @@ public class TestEnvirement {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		player = new Player();
-		creature = new Creature("Creature", 5);
-		thing = new Thing("Dagger");
-		creature.addToInventory(thing.getID());
+		String t1 = "asdlökfjlöskdafjlksdafjsdafjlöskdafjsdalökfjlskadfjlsadkjfklsdajflskdafjlskdafjlksdafjlk \n sakdfhjlskdjafhskdjahfskjahfkjsdafhksdjahf";
+		String t2 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+		String t3 = "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
 		
-		StoryManager syma = new StoryManager();
-		//all Events
-		syma.getEventManager().addEntityGetsToPosition("X1", player, 100, 100);
-		syma.getEventManager().addIsStatus("reached Level 20", player, "Level", 20);
-		syma.getEventManager().addEntityGetsToPosition("X3", player, 200, 200);
+		Creature creature = new Creature("Crea1", 10);
+		DialogManager dm = new DialogManager();
 		
-		//all transitions
-		syma.getEventManager().addEventBefore("X1", Event.getEventByName("START"));
-		syma.getEventManager().addEventBefore("reached Level 20", Event.getEventByName("X1"));
-		syma.getEventManager().addEventBefore("X3", Event.getEventByName("reached Level 20"));
+		dm.addDialog(creature, "Dia1");
 		
-	//Start
-		syma.printStatus();
-		//X1 gets active
-		syma.update();
+		//add Texts
+		dm.getDialog(creature, "Dia1").addText("T1", t1);
+		dm.getDialog(creature, "Dia1").addText("T2", t2);
+		dm.getDialog(creature, "Dia1").addText("T3", t3);
+		dm.getDialog(creature, "Dia1").setReEntryText("T1");
 		
-		syma.printStatusActiveEvents();
+		//addOptions
+		dm.getDialog(creature, "Dia1").addOption("Option b", "T1", "T2");
+		dm.getDialog(creature, "Dia1").addOption("Option c", "T1", "T3");
 		
-	//Player moved
-		player.setPosition(100, 100);
-		//X1 -> done, reached Level 20 -> active
-		syma.update();		
-		
-		syma.printStatusActiveEvents();
-		
-	//set Level of Player to 20
-		player.status().set("Level", 20);
-		//reached Level 20 -> done, X3 -> active
-		syma.update();
-		
-		syma.printStatusActiveEvents();
-		
-	//Player moves
-		player.setPosition(200, 200);
-		//X3 -> done
-		syma.update();
-		
-	//End
-		syma.printStatus();
-		
-		//get all stats of Player and Creature using the new .debug()
-		player.status().debug();
-		creature.status().debug();
-				
+		//test
+		dm.openDialog(creature, "Dia1");
+		print(dm);
+		dm.choosOption("Option b");
+		print(dm);
+		dm.closeDialog();
+		dm.openDialog(creature, "Dia1");
+		print(dm);
+	}
+	
+	//TODO delete Test Method!!!
+	private static void print(DialogManager dm){
+		System.out.println(dm.getOpenDialogText());
+		for(int i = 0; i < dm.getOptions().length; i++){
+			System.out.println("Option" + i + ":" + dm.getOptions()[i]);
+		}
 	}
 }
