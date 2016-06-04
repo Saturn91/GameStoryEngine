@@ -9,6 +9,7 @@ import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.EventTypes.DeathOfEntity;
 import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
 import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
+import GameEventEngine.Events.EventTypes.EntityStatusIs;
 import GameEventEngine.Events.EventTypes.StartEvent;
 
 public class EventManager {
@@ -30,6 +31,10 @@ public class EventManager {
 	
 	public void addHasInInventory(String name, Entity entity, Entity inInventory){
 		eventList.add(new EntityHasInInvetory(name, entity, inInventory));
+	}
+	
+	public void addIsStatus(String name, Entity entity, String varName, int value){
+		eventList.add(new EntityStatusIs(name, entity, varName, value));
 	}
 	
 	public void addEventBefore(String name, Event event){

@@ -10,8 +10,10 @@ public class Entity {
 	private boolean alive;
 	private ArrayList<Entity> inventory = new ArrayList<>();
 	private static ArrayList<Entity> entitys = new ArrayList<>();
+	protected Status status;
 	
 	public Entity(String name){
+		status = new Status();
 		this.name = name;
 		alive = true;
 		id = entitys.size();		
@@ -83,5 +85,9 @@ public class Entity {
 	
 	public long getID(){
 		return id;
+	}
+	
+	public Status status(){
+		return status;
 	}
 }

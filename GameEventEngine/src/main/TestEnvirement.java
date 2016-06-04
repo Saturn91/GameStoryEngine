@@ -17,23 +17,20 @@ public class TestEnvirement {
 	 */
 	public static void main(String[] args){
 		player = new Player();
-		creature = new Creature("Creature");
+		creature = new Creature("Creature", 5);
 		thing = new Thing("Dagger");
 		creature.addToInventory(thing.getID());
 		
 		StoryManager syma = new StoryManager();
 		//all Events
 		syma.getEventManager().addEntityGetsToPosition("X1", player, 100, 100);
-		syma.getEventManager().addDeathOfEntity("X2", creature);
+		syma.getEventManager().addIsStatus("reached Level 20", player, "Level", 20);
 		syma.getEventManager().addEntityGetsToPosition("X3", player, 200, 200);
 		
 		//all transitions
 		syma.getEventManager().addEventBefore("X1", Event.getEventByName("START"));
-		syma.getEventManager().addEventBefore("X2", Event.getEventByName("X1"));
-		syma.getEventManager().addEventBefore("X3", Event.getEventByName("X2"));
-		
-		//all actions
-		syma.getActionManager().addKill(creature, Event.getEventByName("X2"));
+		syma.getEventManager().addEventBefore("reached Level 20", Event.getEventByName("X1"));
+		syma.getEventManager().addEventBefore("X3", Event.getEventByName("reached Level 20"));
 		
 	//Start
 		syma.printStatus();
@@ -44,13 +41,14 @@ public class TestEnvirement {
 		
 	//Player moved
 		player.setPosition(100, 100);
-		//X1 -> done, X2 -> active, Creature dies (because X2 is active)
+		//X1 -> done, reached Level 20 -> active
 		syma.update();		
 		
 		syma.printStatusActiveEvents();
 		
-	//Creature is Dead!
-		//X2 -> done, X3 -> active
+	//set Level of Player to 20
+		player.status().set("Level", 20);
+		//reached Level 20 -> done, X3 -> active
 		syma.update();
 		
 		syma.printStatusActiveEvents();
