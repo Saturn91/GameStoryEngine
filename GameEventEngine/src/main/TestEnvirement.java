@@ -42,6 +42,7 @@ public class TestEnvirement {
 		syma.getDialogManager().choosOption("Option b");
 		print(syma.getDialogManager());
 		syma.getDialogManager().closeDialog();
+		creature.kill();
 		syma.getDialogManager().openDialog(creature, "Dia1");
 		print(syma.getDialogManager());
 	}

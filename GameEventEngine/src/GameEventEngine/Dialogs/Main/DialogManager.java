@@ -45,7 +45,11 @@ public class DialogManager {
 	}
 	
 	public String[] getOptions(){
-		return openDialog.getOptionString();
+		if(openDialog != null){
+			return openDialog.getOptionString();
+		}else{
+			return new String[0];
+		}
 	}
 	
 	public void choosOption(String optionName){
