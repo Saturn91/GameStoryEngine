@@ -17,33 +17,33 @@ public class TestEnvirement {
 	 * @param args
 	 */
 	public static void main(String[] args){
-		String t1 = "asdlökfjlöskdafjlksdafjsdafjlöskdafjsdalökfjlskadfjlsadkjfklsdajflskdafjlskdafjlksdafjlk \n sakdfhjlskdjafhskdjahfskjahfkjsdafhksdjahf";
+		String t1 = "asdlökfjlöskdafjlksdafjsdafjlöskdafjsdalökfjlskadfjlsadkjfklsdajflskdafjlskdafjlksdafjlk \nsakdfhjlskdjafhskdjahfskjahfkjsdafhksdjahf";
 		String t2 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
 		String t3 = "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
 		
 		Creature creature = new Creature("Crea1", 10);
-		DialogManager dm = new DialogManager();
+		StoryManager syma = new StoryManager();
 		
-		dm.addDialog(creature, "Dia1");
+		syma.getDialogManager().addDialog(creature, "Dia1");
 		
 		//add Texts
-		dm.getDialog(creature, "Dia1").addText("T1", t1);
-		dm.getDialog(creature, "Dia1").addText("T2", t2);
-		dm.getDialog(creature, "Dia1").addText("T3", t3);
-		dm.getDialog(creature, "Dia1").setReEntryText("T1");
+		syma.getDialogManager().getDialog(creature, "Dia1").addText("T1", t1);
+		syma.getDialogManager().getDialog(creature, "Dia1").addText("T2", t2);
+		syma.getDialogManager().getDialog(creature, "Dia1").addText("T3", t3);
+		syma.getDialogManager().getDialog(creature, "Dia1").setReEntryText("T1");
 		
 		//addOptions
-		dm.getDialog(creature, "Dia1").addOption("Option b", "T1", "T2");
-		dm.getDialog(creature, "Dia1").addOption("Option c", "T1", "T3");
+		syma.getDialogManager().getDialog(creature, "Dia1").addOption("Option b", "T1", "T2");
+		syma.getDialogManager().getDialog(creature, "Dia1").addOption("Option c", "T1", "T3");
 		
 		//test
-		dm.openDialog(creature, "Dia1");
-		print(dm);
-		dm.choosOption("Option b");
-		print(dm);
-		dm.closeDialog();
-		dm.openDialog(creature, "Dia1");
-		print(dm);
+		syma.getDialogManager().openDialog(creature, "Dia1");
+		print(syma.getDialogManager());
+		syma.getDialogManager().choosOption("Option b");
+		print(syma.getDialogManager());
+		syma.getDialogManager().closeDialog();
+		syma.getDialogManager().openDialog(creature, "Dia1");
+		print(syma.getDialogManager());
 	}
 	
 	//TODO delete Test Method!!!

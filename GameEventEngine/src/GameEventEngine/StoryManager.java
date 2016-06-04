@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Entites.Entity;
 import Entites.Player;
 import GameEventEngine.Actions.Main.ActionManager;
+import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.EventTypes.DeathOfEntity;
@@ -17,10 +18,12 @@ public class StoryManager {
 	public static boolean testing = false;
 	private EventManager evma;
 	private ActionManager acma;
+	private DialogManager dima;
 	
 	public StoryManager() {
 		evma = new EventManager();
 		acma = new ActionManager();
+		dima = new DialogManager();
 	}
 	
 	public EventManager getEventManager(){
@@ -29,6 +32,10 @@ public class StoryManager {
 	
 	public ActionManager getActionManager(){
 		return acma;
+	}
+	
+	public DialogManager getDialogManager(){
+		return dima;
 	}
 	
 	public void update(){
