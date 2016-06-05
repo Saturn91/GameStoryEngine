@@ -6,7 +6,7 @@ import Entites.Creature;
 import GameEventEngine.Events.Event.Event;
 
 public class Dialog {
-	private static final String startTag = "[START]";
+	private static final String startTag = "[UNDEFIND]";
 	private String reEntryText;
 	private Creature creature;
 	private String name;
