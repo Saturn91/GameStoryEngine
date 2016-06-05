@@ -3,13 +3,13 @@ package GameEventEngine.Dialogs.Dialog;
 import java.util.ArrayList;
 
 import Entites.Creature;
+import GameEventEngine.Events.Event.Event;
 
 public class Dialog {
 	private static final String startTag = "[START]";
 	private String reEntryText;
 	private Creature creature;
 	private String name;
-	private Status status = Status.CLOSED;
 	private ArrayList<Text> textList = new ArrayList<>();
 	private ArrayList<String> textNameList = new ArrayList<>();
 	private ArrayList<Option> optionList = new ArrayList<>();
@@ -36,6 +36,12 @@ public class Dialog {
 		textList.get(textNameList.indexOf(OriginTextName)).addOptions();
 	}
 	
+	public void setReEntryPointIF(String reEntryText, Event event){
+		
+	}
+	
+	
+	
 	private Text getText(String name){
 		if(textNameList.contains(name)){
 			return textList.get(textNameList.indexOf(name));
@@ -51,12 +57,10 @@ public class Dialog {
 	}
 	
 	public void open(){
-		status = Status.OPEN;
 		actualText = reEntryText;
 	}
 	
 	public void close(){
-		status = Status.CLOSED;
 		actualText = reEntryText;
 	}
 	
@@ -67,10 +71,6 @@ public class Dialog {
 			System.err.println("Dialog: Text:<" + name + "> does not exists -> not able to change reentrypoint! ");
 		}
 	}
-	
-	public enum Status{
-		OPEN, CLOSED;
-	}
 
 	public String getTextString() {
 		update();
@@ -78,6 +78,7 @@ public class Dialog {
 	}
 	
 	public String[] getOptionString() {
+		update();
 		String[] options = new String[textList.get(textNameList.indexOf(actualText)).getOptionNum()];
 		int counter = 0;
 		for(Option o: optionList){
