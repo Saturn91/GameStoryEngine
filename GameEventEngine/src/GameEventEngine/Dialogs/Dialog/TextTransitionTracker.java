@@ -5,18 +5,19 @@ import java.util.ArrayList;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 
-public class DialogTransitionTracker {
+public class TextTransitionTracker {
 	private String originText;
 	private String defaultText;
 	private ArrayList<String> destinationTexts = new ArrayList<>();
 	private ArrayList<Event> eventsList = new ArrayList<>();
 	
-	public DialogTransitionTracker(String originText, String defaultText) {
+	public TextTransitionTracker(String originText, String defaultText) {
 		this.defaultText = defaultText;
 		this.originText = originText;
 	}
 	
 	public void addTransition(Event event, String textName){
+		Event.setEventStatus(event.getName(), Event_Status.ACTIVE);
 		destinationTexts.add(textName);
 		eventsList.add(event);
 	}
@@ -24,7 +25,7 @@ public class DialogTransitionTracker {
 	public String nextText(){
 		update();
 		for(Event e: eventsList){
-			if(e.isStatus(Event_Status.DONE)){
+			if(Event.isStatus(e.getName(), Event_Status.DONE)){
 				return destinationTexts.get(eventsList.indexOf(e));
 			}
 		}

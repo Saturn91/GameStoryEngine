@@ -4,6 +4,7 @@ public class Text {
 	private String name;
 	private String text;
 	private boolean hasOptions;
+	private boolean hasTransitionTracker = false;
 	private int options = 0;
 	private boolean alreadyRead = false;
 	private Status status = Status.INACTIVE;
@@ -65,6 +66,14 @@ public class Text {
 	
 	public boolean hasOption(){
 		return hasOptions;
+	}
+	
+	public void addTransitionTracker(){
+		hasTransitionTracker = true;
+	}
+	
+	public boolean hasTransitionTracker(){
+		return hasTransitionTracker;
 	}
 	
 	public int getOptionNum(){

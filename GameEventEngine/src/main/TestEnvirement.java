@@ -1,57 +1,49 @@
 package main;
 
 import Entites.Creature;
-import Entites.Entity;
-import Entites.Player;
-import Entites.Thing;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Dialogs.Main.DialogManager;
-import GameEventEngine.Events.Event.Event;
+import GameEventEngine.Events.EventTypes.DeathOfEntity;
 
 public class TestEnvirement {
-	private static Player player;
-	private static Creature creature;
-	private static Thing thing;
-	/**
-	 * aplication Launcher
-	 * @param args
-	 */
-	public static void main(String[] args){
-		String t1 = "asdlökfjlöskdafjlksdafjsdafjlöskdafjsdalökfjlskadfjlsadkjfklsdajflskdafjlskdafjlksdafjlk \nsakdfhjlskdjafhskdjahfskjahfkjsdafhksdjahf";
-		String t2 = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
-		String t3 = "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
-		
-		Creature creature = new Creature("Crea1", 10);
+	public static void main(String[] args) {
+		Creature msTipten = new Creature("Creature", 10);
+		Creature mrButler = new Creature("Mr. Butler", 10);
 		StoryManager syma = new StoryManager();
+		syma.getDialogManager().addDialog(msTipten, "Dia1");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addText("START", "Hi Mr. Bond nice to see you here, are you enjoing the Party?");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addText("O1", "Oh, what a pitty i didn't know that!");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addText("O2", "Yeah! Thats true, its fantastic here!");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addText("T2", "I will never Speak with you again!");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addText("T3", "I Think Mr. Butler is a very Handful Man, what about you?");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").setReEntryText("START");
 		
-		syma.getDialogManager().addDialog(creature, "Dia1");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addOption("No, i'm quite ill!", "START", "O1");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addOption("Yes", "START", "O2");
 		
-		//add Texts
-		syma.getDialogManager().getDialog(creature, "Dia1").addText("T1", t1);
-		syma.getDialogManager().getDialog(creature, "Dia1").addText("T2", t2);
-		syma.getDialogManager().getDialog(creature, "Dia1").addText("T3", t3);
-		syma.getDialogManager().getDialog(creature, "Dia1").setReEntryText("T1");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addTransitionTracker("O2", "T3");
+		syma.getDialogManager().getDialog(msTipten, "Dia1").addTransition("O2", new DeathOfEntity("killed Mr. Bond", mrButler), "T2");
 		
-		//addOptions
-		syma.getDialogManager().getDialog(creature, "Dia1").addOption("Option b", "T1", "T2");
-		syma.getDialogManager().getDialog(creature, "Dia1").addOption("Option c", "T1", "T3");
-		
-		//test
-		syma.getDialogManager().openDialog(creature, "Dia1");
+	//open Dialog
+		syma.getDialogManager().openDialog(msTipten, "Dia1");
 		print(syma.getDialogManager());
-		syma.getDialogManager().choosOption("Option b");
+		
+		syma.getDialogManager().choosOption("Yes");
+		
 		print(syma.getDialogManager());
-		syma.getDialogManager().closeDialog();
-		creature.kill();
-		syma.getDialogManager().openDialog(creature, "Dia1");
+		
+		mrButler.kill();
+		syma.getDialogManager().getNextText();
+		
 		print(syma.getDialogManager());
 	}
 	
-	//TODO delete Test Method!!!
-	private static void print(DialogManager dm){
-		System.out.println(dm.getOpenDialogText());
-		for(int i = 0; i < dm.getOptions().length; i++){
-			System.out.println("Option" + i + ":" + dm.getOptions()[i]);
+	public static void print(DialogManager dima){
+		System.out.println(dima.getOpenDialogText());
+		if(dima.getOptions().length > 0){
+			for(int i = 0; i < dima.getOptions().length; i++){
+				System.out.println(i + ": " + dima.getOptions()[i]);
+			}
 		}
 	}
 }

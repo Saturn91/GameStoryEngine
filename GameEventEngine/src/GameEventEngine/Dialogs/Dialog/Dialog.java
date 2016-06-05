@@ -13,12 +13,34 @@ public class Dialog {
 	private ArrayList<Text> textList = new ArrayList<>();
 	private ArrayList<String> textNameList = new ArrayList<>();
 	private ArrayList<Option> optionList = new ArrayList<>();
+	private ArrayList<TextTransitionTracker> textTranistionTrackers = new ArrayList<>();
 	private String actualText = null;
 	
 	public Dialog(Creature creature, String name) {
 		this.creature = creature;
 		this.name = name;
 		actualText = startTag;
+	}
+	
+	public void addTransitionTracker(String originText, String defaultText){
+		if(textNameList.contains(originText)){
+			if(textNameList.contains(defaultText)){
+				if(!getText(originText).hasTransitionTracker()){
+					textTranistionTrackers.add(new TextTransitionTracker(originText, defaultText));
+					getText(originText).addTransitionTracker();
+				}else{
+					System.err.println("Dialog: <" + originText + "> has already a TransitionTracker!");
+				}
+			}else{
+				System.err.println("Dialog: <" + defaultText + "> is no valid textname!");
+			}
+		}else{
+			System.err.println("Dialog: <" + originText + "> is no valid textname!");
+		}
+	}
+	
+	public void addTransition(String originText, Event event, String textName){
+		getTransitionTrackerOf(originText).addTransition(event, textName);
 	}
 	
 	public void addText(String name, String text){
@@ -40,8 +62,6 @@ public class Dialog {
 		
 	}
 	
-	
-	
 	private Text getText(String name){
 		if(textNameList.contains(name)){
 			return textList.get(textNameList.indexOf(name));
@@ -51,13 +71,12 @@ public class Dialog {
 		}
 	}
 	
-	public void update(){
-		//TODO update the dialogs
-		//set actualText! acoording to World events!
-	}
-	
 	public void open(){
-		actualText = reEntryText;
+		if(reEntryText != null){
+			actualText = reEntryText;
+		}else{
+			System.err.println("Dialog: no reEntryText has been choosen!");
+		}		
 	}
 	
 	public void close(){
@@ -73,12 +92,10 @@ public class Dialog {
 	}
 
 	public String getTextString() {
-		update();
 		return textList.get(textNameList.indexOf(actualText)).open();
 	}
 	
 	public String[] getOptionString() {
-		update();
 		String[] options = new String[textList.get(textNameList.indexOf(actualText)).getOptionNum()];
 		int counter = 0;
 		for(Option o: optionList){
@@ -90,11 +107,30 @@ public class Dialog {
 		return options;
 	}
 	
+	public void getNextText(){
+		actualText = getTransitionTrackerOf(actualText).nextText();
+	}
+	
 	public boolean actualHasOptions(){
 		return textList.get(textNameList.indexOf(actualText)).hasOption();
 	}
 	
 	public void chooseOption(String optionName){
-		actualText = optionList.get(optionName.indexOf(optionName)).choose();
+		for(Option o: optionList){
+			if(o.getName().equals(optionName)){
+				actualText = o.choose();
+			}
+		}
+		//actualText = optionList.get(optionName.indexOf(optionName)).choose();
+	}
+	
+	public TextTransitionTracker getTransitionTrackerOf(String originText){
+		for(TextTransitionTracker t: textTranistionTrackers){
+			if(t.isOriginText(originText)){
+				return t;
+			}
+		}
+		System.err.println("Dialog: no transitionTracker ");
+		return null;
 	}
 }

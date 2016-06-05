@@ -22,7 +22,6 @@ public class DialogManager {
 	public void openDialog(Creature creature, String name){
 		if(creature.isAlive()){
 			openDialog = creature.getDialog(name);
-			openDialog.update();
 			openDialog.open();
 		}else{
 			System.err.println("DialogManager : can not speak to dead " + creature.getName());
@@ -36,7 +35,6 @@ public class DialogManager {
 	public String getOpenDialogText(){
 		if(openDialog != null){
 			//print...
-			openDialog.update();
 			return openDialog.getTextString();
 		}else{
 			System.err.println("no open dialog!");
@@ -54,5 +52,9 @@ public class DialogManager {
 	
 	public void choosOption(String optionName){
 		openDialog.chooseOption(optionName);
-	}	
+	}
+	
+	public void getNextText(){
+		openDialog.getNextText();
+	}
 }
