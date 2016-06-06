@@ -2,6 +2,7 @@ package GameEventEngine.Events.Main;
 
 import java.util.ArrayList;
 
+import Entites.Creature;
 import Entites.Entity;
 import Entites.Player;
 import GameEventEngine.Events.Event.Event;
@@ -11,6 +12,7 @@ import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
 import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
 import GameEventEngine.Events.EventTypes.EntityStatusIs;
 import GameEventEngine.Events.EventTypes.StartEvent;
+import GameEventEngine.Events.EventTypes.TextSeenByPlayer;
 
 public class EventManager {
 	ArrayList<Event> eventList = new ArrayList<>();
@@ -35,6 +37,10 @@ public class EventManager {
 	
 	public void addIsStatus(String name, Entity entity, String varName, int value){
 		eventList.add(new EntityStatusIs(name, entity, varName, value));
+	}
+	
+	public void addTextRead(String name, String textName, Creature creature){
+		eventList.add(new TextSeenByPlayer(name, textName, creature));
 	}
 	
 	public void addEventBefore(String name, Event event){
