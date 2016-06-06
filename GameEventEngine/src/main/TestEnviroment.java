@@ -28,7 +28,7 @@ public class TestEnviroment {
 		syma.getEventManager().addHasInInventory("E2", player, key);
 		syma.getEventManager().addDeathOfEntity("E3", watchMan);
 		syma.getEventManager().addEntityGetsToPosition("E4", player, 10, 10);
-		syma.getEventManager().addTextRead("E5", "gr", lady);
+		syma.getEventManager().addTextRead("E5", "T4", lady);
 		
 		//Actions
 		syma.getActionManager().addGive(player, sword, Event.getEventByName("E3"));
@@ -36,8 +36,8 @@ public class TestEnviroment {
 		syma.getActionManager().addGive(player, ring, Event.getEventByName("E5"));
 		
 		//setTransitions
-		syma.getEventManager().addEventBefore("E1", Event.getStartEvent());
-		syma.getEventManager().addEventBefore("E2", Event.getStartEvent());
+		syma.getEventManager().addEventBefore("E1", Event.getEventByName(Event.START_TAG));
+		syma.getEventManager().addEventBefore("E2", Event.getEventByName(Event.START_TAG));
 		syma.getEventManager().addEventBefore("E3", Event.getEventByName("E1"));
 		syma.getEventManager().addEventBefore("E4", Event.getEventByName("E3"));
 		syma.getEventManager().addEventBefore("E4", Event.getEventByName("E2"));
@@ -60,20 +60,60 @@ public class TestEnviroment {
 		syma.getDialogManager().getDialog(lady).addOption("No", "T3", "T5");
 		syma.getDialogManager().getDialog(lady).setTextBye("T4", true);
 		
-		syma.getEventManager().printStatus();
-		syma.update();
-		syma.getEventManager().printStatus();
+		//EntryPoint
+		syma.getDialogManager().getDialog(lady).setReEntryText("T1");
 		
+	//RUN
+		syma.getEventManager().printStatus();
+		updatePrint();
+		player.addToInventory(dagger.getID());
+		updatePrint();
+		player.addToInventory(key.getID());
+		updatePrint();
+		watchMan.kill();
+		updatePrint();
+		System.out.println("-----------------player has Sword in inventory: " + player.hasinInventory(sword.getID()));
+		player.setPosition(10, 10);
+		updatePrint();
+		System.out.println("-----------------player has Sword in inventory: " + player.hasinInventory(sword.getID()));
+		syma.getDialogManager().openDialog(lady);
+		print();
+		syma.getDialogManager().getNextText();
+		print();
+		syma.getDialogManager().choosOption("No");
+		print();
+		syma.getDialogManager().closeDialog();
+		System.out.println("-----------------player has Ring in inventory: " + player.hasinInventory(ring.getID()));
+		syma.getDialogManager().openDialog(lady);
+		print();
+		syma.getDialogManager().getNextText();
+		print();
+		syma.getDialogManager().choosOption("Yes");
+		print();
+		syma.getDialogManager().getNextText();
+		print();
+		updatePrint();
+		System.out.println("-----------------player has Ring in inventory: " + player.hasinInventory(ring.getID()));
 	}
 	
 	public static void print(){
 		if(syma.getDialogManager().isDialogOpen()){
+			System.out.println("==================Dialog: =============================");
 			System.out.println(syma.getDialogManager().getOpenDialogText());
 			if(syma.getDialogManager().getOptions().length > 0){
+				System.out.println("==================Option: =============================");
 				for(int i = 0; i < syma.getDialogManager().getOptions().length; i++){
 					System.out.println(i + ": " + syma.getDialogManager().getOptions()[i]);
 				}
 			}
-		}		
+			System.out.println("=======================================================");
+		}else{
+			System.out.println("no open Dialog!");
+		}
+	}
+	
+	public static void updatePrint(){
+		syma.update();
+		syma.printStatus();
 	}
 }
