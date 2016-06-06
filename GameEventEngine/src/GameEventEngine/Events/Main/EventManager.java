@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Entites.Creature;
 import Entites.Entity;
-import Entites.Player;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.EventTypes.DeathOfEntity;
