@@ -3,7 +3,6 @@ package GameEventEngine;
 import java.util.ArrayList;
 
 import Entites.Entity;
-import Entites.Player;
 import GameEventEngine.Actions.Main.ActionManager;
 import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;
