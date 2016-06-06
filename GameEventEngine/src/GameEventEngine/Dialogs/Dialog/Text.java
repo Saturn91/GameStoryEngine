@@ -9,6 +9,7 @@ public class Text {
 	private boolean alreadyRead = false;
 	private Status status = Status.INACTIVE;
 	private static final int lineDebugLenght = 30;
+	private boolean isBye = false;
 
 	public Text(String name, String text) {
 		this.hasOptions = false;
@@ -78,6 +79,14 @@ public class Text {
 	
 	public int getOptionNum(){
 		return options;
+	}
+	
+	public void setBye(boolean isBye){
+		this.isBye = isBye;
+	}
+	
+	public boolean isBye(){
+		return isBye;
 	}
 		
 	private enum Status {

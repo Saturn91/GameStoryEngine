@@ -116,6 +116,10 @@ public class Dialog {
 		//actualText = optionList.get(optionName.indexOf(optionName)).choose();
 	}
 	
+	public boolean actualTextIsBye(){
+		return getText(actualText).isBye();
+	}
+	
 	public TextTransitionTracker getTransitionTrackerOf(String originText){
 		for(TextTransitionTracker t: textTranistionTrackers){
 			if(t.isOriginText(originText)){
@@ -124,5 +128,9 @@ public class Dialog {
 		}
 		System.err.println("Dialog: no transitionTracker ");
 		return null;
+	}
+	
+	public void setTextBye(String name, boolean bye){
+		getText(name).setBye(bye);
 	}
 }

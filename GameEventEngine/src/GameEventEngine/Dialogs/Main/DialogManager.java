@@ -61,8 +61,10 @@ public class DialogManager {
 	}
 	
 	public void getNextText(){
-		if(isDialogOpen()){
+		if(isDialogOpen() &! openDialog.actualTextIsBye()){
 			openDialog.getNextText();
+		}else{
+			closeDialog();
 		}
 	}
 }
