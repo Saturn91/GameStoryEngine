@@ -58,7 +58,7 @@ public class Dialog {
 		
 	}
 	
-	private Text getText(String name){
+	public Text getText(String name){
 		if(textNameList.contains(name)){
 			return textList.get(textNameList.indexOf(name));
 		}else{
