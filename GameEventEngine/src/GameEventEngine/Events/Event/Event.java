@@ -100,6 +100,10 @@ public abstract class Event {
 		return status.equals(status);
 	}
 	
+	public static Event getStartEvent(){
+		return getEventByID(1);
+	}
+	
 	abstract public void update();
 	
 	
