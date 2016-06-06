@@ -11,6 +11,7 @@ public class TextSeenByPlayer extends Event{
 	public TextSeenByPlayer(String name, String textName ,Creature creature) {
 		super(name , "gets true if " + name + " gets killed");
 		this.creature = creature;
+		this.textName = textName;
 		transistion = new Transistion(this);
 	}
 	
