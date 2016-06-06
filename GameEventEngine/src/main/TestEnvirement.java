@@ -25,7 +25,6 @@ public class TestEnvirement {
 		syma.getDialogManager().getDialog(msTipten).addTransition("O2", new DeathOfEntity("killed Mr. Bond", mrButler), "T2");
 		
 	//open Dialog
-		//mrButler.kill();
 		syma.getDialogManager().openDialog(msTipten);
 		print(syma.getDialogManager());
 		
