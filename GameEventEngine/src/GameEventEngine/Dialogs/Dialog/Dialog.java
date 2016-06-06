@@ -54,10 +54,6 @@ public class Dialog {
 		textList.get(textNameList.indexOf(OriginTextName)).addOptions();
 	}
 	
-	public void setReEntryPointIF(String reEntryText, Event event){
-		
-	}
-	
 	public Text getText(String name){
 		if(textNameList.contains(name)){
 			return textList.get(textNameList.indexOf(name));
