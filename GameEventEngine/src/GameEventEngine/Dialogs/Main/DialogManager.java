@@ -51,10 +51,18 @@ public class DialogManager {
 	}
 	
 	public void choosOption(String optionName){
-		openDialog.chooseOption(optionName);
+		if(isDialogOpen()){
+			openDialog.chooseOption(optionName);
+		}		
+	}
+	
+	public boolean isDialogOpen(){
+		return openDialog !=null;
 	}
 	
 	public void getNextText(){
-		openDialog.getNextText();
+		if(isDialogOpen()){
+			openDialog.getNextText();
+		}
 	}
 }
