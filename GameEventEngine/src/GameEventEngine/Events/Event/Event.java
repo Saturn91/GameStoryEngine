@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public abstract class Event {
 	protected Transistion transistion;
+	public static final String START_TAG = "[START]";
 	private static ArrayList<Long> usedIds = new ArrayList<>();
 	private static ArrayList<Event> events = new ArrayList<>();
 	private Event_Status status = Event_Status.INACTIVE;

@@ -6,8 +6,8 @@ import GameEventEngine.Events.Event.Event_Status;
 public class StartEvent extends Event{
 
 	public StartEvent() {
-		super("START", "Initialization");
-		this.setEventStatus("START", Event_Status.DONE);
+		super(Event.START_TAG, "Initialization");
+		this.setEventStatus(Event.START_TAG, Event_Status.DONE);
 	}
 
 	@Override
