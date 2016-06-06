@@ -100,7 +100,11 @@ public class Dialog {
 	}
 	
 	public void getNextText(){
-		actualText = getTransitionTrackerOf(actualText).nextText();
+		if(getText(actualText).hasTransitionTracker()){
+			actualText = getTransitionTrackerOf(actualText).nextText();
+		}else{
+			System.err.println("Dialog: no Transitiontracker for: " + actualText);
+		}
 	}
 	
 	public boolean actualHasOptions(){
