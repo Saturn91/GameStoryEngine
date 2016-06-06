@@ -16,6 +16,7 @@ public class TestEnvirement {
 		syma.getDialogManager().getDialog(msTipten).addText("O2", "Yeah! Thats true, its fantastic here!");
 		syma.getDialogManager().getDialog(msTipten).addText("T2", "I will never Speak with you again!");
 		syma.getDialogManager().getDialog(msTipten).addText("T3", "I Think Mr. Butler is a very Handful Man, what about you?");
+		syma.getDialogManager().getDialog(msTipten).setTextBye("T3", true);
 		syma.getDialogManager().getDialog(msTipten).setReEntryText("START");
 		
 		syma.getDialogManager().getDialog(msTipten).addOption("No, i'm quite ill!", "START", "O1");
@@ -34,7 +35,12 @@ public class TestEnvirement {
 		
 		
 		syma.getDialogManager().getNextText();
+		print(syma.getDialogManager());
+		syma.getDialogManager().getNextText();
 		
+		print(syma.getDialogManager());
+		
+		syma.getDialogManager().openDialog(msTipten);
 		print(syma.getDialogManager());
 	}
 	

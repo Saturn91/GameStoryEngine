@@ -7,7 +7,6 @@ import GameEventEngine.Dialogs.Dialog.Dialog;
 
 public class DialogManager {
 	private Dialog openDialog;
-	
 	public void addDialog(Creature creature){
 		creature.addDialog();
 	}
