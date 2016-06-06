@@ -53,7 +53,7 @@ public class TestEnviroment {
 		
 		//Transitions
 		syma.getDialogManager().getDialog(lady).addTransitionTracker("T1", "T2");
-		//syma.getDialogManager().getDialog(lady).addTransition("T1", Event.getEventByName("E3"), "T3");
+		syma.getDialogManager().getDialog(lady).addTransition("T1", new DeathOfEntity("E6", watchMan), "T3");
 		
 		//Options
 		syma.getDialogManager().getDialog(lady).addOption("Yes", "T3", "T4");
