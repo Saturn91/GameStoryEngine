@@ -8,20 +8,20 @@ import GameEventEngine.Dialogs.Dialog.Dialog;
 public class DialogManager {
 	private Dialog openDialog;
 	
-	public void addDialog(Creature creature, String name){
-		creature.addDialog(name);
+	public void addDialog(Creature creature){
+		creature.addDialog();
 	}
 	
-	public Dialog getDialog(Creature creature, String name){
-		return creature.getDialog(name);
+	public Dialog getDialog(Creature creature){
+		return creature.getDialog();
 	}
 	
 	
 	
 //**********************************Handle Dialog Methodes *************************************
-	public void openDialog(Creature creature, String name){
+	public void openDialog(Creature creature){
 		if(creature.isAlive()){
-			openDialog = creature.getDialog(name);
+			openDialog = creature.getDialog();
 			openDialog.open();
 		}else{
 			System.err.println("DialogManager : can not speak to dead " + creature.getName());

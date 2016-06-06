@@ -8,17 +8,13 @@ import GameEventEngine.Events.Event.Event;
 public class Dialog {
 	private static final String startTag = "[UNDEFIND]";
 	private String reEntryText;
-	private Creature creature;
-	private String name;
 	private ArrayList<Text> textList = new ArrayList<>();
 	private ArrayList<String> textNameList = new ArrayList<>();
 	private ArrayList<Option> optionList = new ArrayList<>();
 	private ArrayList<TextTransitionTracker> textTranistionTrackers = new ArrayList<>();
 	private String actualText = null;
 	
-	public Dialog(Creature creature, String name) {
-		this.creature = creature;
-		this.name = name;
+	public Dialog() {
 		actualText = startTag;
 	}
 	

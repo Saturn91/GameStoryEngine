@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import GameEventEngine.Dialogs.Dialog.Dialog;
 
 public class Creature extends Entity{
-	private ArrayList<Dialog> dialogList = new ArrayList<>();
-	private ArrayList<String> dialogNames = new ArrayList<>();
+	private Dialog dialog;
 	public Creature(String name, int Level) {
 		super(name);
 		//add the variables for creatures:
@@ -14,21 +13,15 @@ public class Creature extends Entity{
 		status.addInteger("Infamie", 50);
 	}
 	
-	public void addDialog(String name){
-		if(!dialogNames.contains(name)){
-			dialogList.add(new Dialog(this, name));
-			dialogNames.add(name);
-		}else{
-			System.err.println("Creature: <" + name + "> is already used as Dialogname in " + getName());
-		}
-		
+	public void addDialog(){
+		dialog = new Dialog();		
 	}
 	
-	public Dialog getDialog(String name){
-		if(dialogNames.contains(name)){
-			return dialogList.get(dialogNames.indexOf(name));
+	public Dialog getDialog(){
+		if(dialog != null){
+			return dialog;
 		}else{
-			System.err.println("Creature: no Dialog: <" + name + "> for "+ getName());
+			System.err.println("Creature: no Dialog for "+ getName() + " yet");
 			return null;
 		}
 	}
