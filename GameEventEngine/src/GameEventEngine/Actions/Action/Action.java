@@ -24,7 +24,7 @@ public abstract class Action {
 	public Action(String name, Event activater, String description) {
 		this.name = name;
 		this.activater = activater;
-		this.status = Event_Status.ACTIVE;
+		this.status = Event_Status.DONE;
 		this.description = description;
 		id = actions.size();
 		actions.add(this);
