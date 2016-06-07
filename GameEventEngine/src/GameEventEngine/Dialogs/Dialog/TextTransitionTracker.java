@@ -41,4 +41,8 @@ public class TextTransitionTracker {
 	public boolean isOriginText(String name){
 		return originText.equals(name);
 	}
+	
+	public String toString(){
+		return defaultText;
+	}
 }
