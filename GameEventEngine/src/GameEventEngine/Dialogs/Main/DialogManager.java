@@ -2,7 +2,7 @@ package GameEventEngine.Dialogs.Main;
 
 import java.util.ArrayList;
 
-import Entites.Creature;
+import Entites.EntityTypes.Creature;
 import GameEventEngine.Dialogs.Dialog.Dialog;
 
 public class DialogManager {

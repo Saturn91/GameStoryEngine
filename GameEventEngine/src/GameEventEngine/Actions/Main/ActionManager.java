@@ -2,8 +2,8 @@ package GameEventEngine.Actions.Main;
 
 import java.util.ArrayList;
 
-import Entites.Creature;
-import Entites.Thing;
+import Entites.EntityTypes.Creature;
+import Entites.EntityTypes.Thing;
 import GameEventEngine.ActionTypes.Kill;
 import GameEventEngine.ActionTypes.TakeFromInventory;
 import GameEventEngine.ActionTypes.giveToInventory;

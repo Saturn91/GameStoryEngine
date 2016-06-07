@@ -1,4 +1,4 @@
-package Entites;
+package Entites.EntityTypes;
 
 public class Thing extends Entity{
 	boolean isContainer = false;

@@ -2,8 +2,8 @@ package GameEventEngine.Events.Main;
 
 import java.util.ArrayList;
 
-import Entites.Creature;
-import Entites.Entity;
+import Entites.EntityTypes.Creature;
+import Entites.EntityTypes.Entity;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.EventTypes.DeathOfEntity;

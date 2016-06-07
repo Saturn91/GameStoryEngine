@@ -1,6 +1,6 @@
 package GameEventEngine.ActionTypes;
 
-import Entites.Creature;
+import Entites.EntityTypes.Creature;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Actions.Action.Action;
 import GameEventEngine.Events.Event.Event;
