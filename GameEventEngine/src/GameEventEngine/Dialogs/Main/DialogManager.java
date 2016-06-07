@@ -3,27 +3,42 @@ package GameEventEngine.Dialogs.Main;
 import java.util.ArrayList;
 
 import Entites.EntityTypes.Creature;
+import Entity.Main.EntityManager;
 import GameEventEngine.Dialogs.Dialog.Dialog;
 
 public class DialogManager {
 	private Dialog openDialog;
-	public void addDialog(Creature creature){
-		creature.addDialog();
+	public void addDialog(String creatureName){
+		try {
+			((Creature) EntityManager.getEntity(creatureName)).addDialog();
+		} catch (Exception e) {
+			System.err.println("DialogManager: <" + creatureName + "> is no valid Creaturename");
+		}
 	}
 	
-	public Dialog getDialog(Creature creature){
-		return creature.getDialog();
+	public Dialog getDialog(String creatureName){
+		try {
+			return ((Creature) EntityManager.getEntity(creatureName)).getDialog();
+		} catch (Exception e) {
+			System.err.println("DialogManager: <" + creatureName + "> is no valid Creaturename");
+		}
+		return 	null;	
 	}
 	
 	
 	
 //**********************************Handle Dialog Methodes *************************************
-	public void openDialog(Creature creature){
-		if(creature.isAlive()){
-			openDialog = creature.getDialog();
-			openDialog.open();
-		}else{
-			System.err.println("DialogManager : can not speak to dead " + creature.getName());
+	public void openDialog(String creatureName){
+		try {
+			Creature creature = ((Creature) EntityManager.getEntity(creatureName));
+			if(creature.isAlive()){
+				openDialog = creature.getDialog();
+				openDialog.open();
+			}else{
+				System.err.println("DialogManager : can not speak to dead " + creature.getName());
+			}
+		} catch (Exception e) {
+			System.err.println("DialogManager: <" + creatureName + "> is no valid Creaturename");
 		}
 	}
 	

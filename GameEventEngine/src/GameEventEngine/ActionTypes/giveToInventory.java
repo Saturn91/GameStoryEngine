@@ -41,7 +41,7 @@ public class giveToInventory extends Action{
 
 	@Override
 	public void execute() {
-		creature.addToInventory(thing.getID());
+		creature.addToInventory(thing.getName());
 	}
 
 }

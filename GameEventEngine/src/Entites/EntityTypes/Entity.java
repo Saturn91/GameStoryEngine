@@ -20,19 +20,19 @@ public class Entity {
 		entitys.add(this);
 	}
 	
-	public void addToInventory(long id){
-		inventory.add(entitys.get((int) id));
+	public void addToInventory(String name){
+		inventory.add(entitys.get((int) getIdOff(name)));
 	}
 	
-	public Entity takefromInventory(long id){
-		inventory.remove(entitys.get((int) id));
-		return entitys.get((int) id);
+	public Entity takefromInventory(String name){
+		inventory.remove(entitys.get((int) getIdOff(name)));
+		return entitys.get((int) getIdOff(name));
 	}
 	
-	public boolean hasinInventory(long id){
-		if(id < entitys.size() && id >= 0){
+	public boolean hasinInventory(String name){
+		if((int) getIdOff(name) < entitys.size() && (int) getIdOff(name) >= 0){
 			for(Entity e: inventory){
-				if(inventory.contains(entitys.get((int) id))){
+				if(inventory.contains(entitys.get((int) getIdOff(name)))){
 					return true;
 				}
 			}
