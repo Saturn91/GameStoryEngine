@@ -15,36 +15,36 @@ import GameEventEngine.Events.Event.Event_Status;
 public class ActionManager {
 	ArrayList<Action> actionList = new ArrayList<>();
 	
-	public void addKill(Creature creature, Event activater){
-		actionList.add(new Kill(creature, activater));
+	public void addKill( String creatureName, Event activater){
+		actionList.add(new Kill(creatureName, activater));
 	}
 	
-	public void addKill(Creature creature, Event_Status status, Event activater){
-		actionList.add(new Kill(creature, status, activater));
+	public void addKill( String creatureName, Event_Status status, Event activater){
+		actionList.add(new Kill(creatureName, status, activater));
 	}
 	
-	public void addSetReyEntryPointIf(Creature creature, String textName, Event activater){
-		actionList.add(new setReEntryPointIF(creature, textName, activater));
+	public void addSetReyEntryPointIf( String creatureName, String textName, Event activater){
+		actionList.add(new setReEntryPointIF(creatureName, textName, activater));
 	}
 	
-	public void addSetReyEntryPointIf(Creature creature, String textName, Event_Status status, Event activater){
-		actionList.add(new setReEntryPointIF(creature, textName, status, activater));
+	public void addSetReyEntryPointIf( String creatureName, String textName, Event_Status status, Event activater){
+		actionList.add(new setReEntryPointIF(creatureName, textName, status, activater));
 	}
 	
-	public void addGive(Creature creature, Thing thing, Event activater){
-		actionList.add(new giveToInventory(creature, thing, activater));
+	public void addGive( String creatureName, String thingName, Event activater){
+		actionList.add(new giveToInventory(creatureName, thingName, activater));
 	}
 	
-	public void addGive(Creature creature, Thing thing, Event_Status status, Event activater){
-		actionList.add(new giveToInventory(creature, thing, status, activater));
+	public void addGive( String creatureName, String thingName, Event_Status status, Event activater){
+		actionList.add(new giveToInventory(creatureName, thingName, status, activater));
 	}
 	
-	public void addTake(Creature creature, Thing thing, Event activater){
-		actionList.add(new TakeFromInventory(creature, thing, activater));
+	public void addTake( String creatureName, String thingName, Event activater){
+		actionList.add(new TakeFromInventory(creatureName, thingName, activater));
 	}
 	
-	public void addTake(Creature creature, Thing thing, Event_Status status, Event activater){
-		actionList.add(new TakeFromInventory(creature, thing, status, activater));
+	public void addTake( String creatureName, String thingName, Event_Status status, Event activater){
+		actionList.add(new TakeFromInventory(creatureName, thingName, status, activater));
 	}
 	
 	public void update(){

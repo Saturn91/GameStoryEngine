@@ -2,6 +2,7 @@ package GameEventEngine.ActionTypes;
 
 import Entites.EntityTypes.Creature;
 import Entites.EntityTypes.Thing;
+import Entity.Main.EntityManager;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Actions.Action.Action;
 import GameEventEngine.Events.Event.Event;
@@ -10,16 +11,32 @@ import GameEventEngine.Events.Event.Event_Status;
 public class TakeFromInventory extends Action{
 	private Creature creature;
 	private Thing thing;
-	public TakeFromInventory(Creature creature, Thing thing, Event activater) {
-		super("take " + thing.getName(), activater, "take " + thing.getName() + " from " + creature.getName() + " if " + activater.getName() + " is DONE");
-		this.creature = creature;
-		this.thing = thing;
+	public TakeFromInventory(String creatureName, String thingName, Event activater) {
+		super("take " + thingName, activater, "take " + thingName + " from " + creatureName + " if " + activater.getName() + " is DONE");
+		try {
+			this.creature = (Creature) EntityManager.getEntity(creatureName);
+		} catch (Exception e) {
+			System.err.println("TakeFromInventory: <" + creatureName + "> is no valid CreatureName");
+		}
+		try {
+			this.thing = (Thing) EntityManager.getEntity(thingName);
+		} catch (Exception e) {
+			System.err.println("TakeFromInventory: <" + thingName + "> is no valid Thing");
+		}
 	}
 
-	public TakeFromInventory(Creature creature, Thing thing, Event_Status status, Event activater) {
-		super("take " + thing.getName(), activater, status, "take " + thing.getName() + " from " + creature.getName() + " if " + activater.getName() + " is " + status.toString());
-		this.creature = creature;
-		this.thing = thing;
+	public TakeFromInventory(String creatureName, String thingName, Event_Status status, Event activater) {
+		super("take " + thingName, activater, status, "take " + thingName + " from " + creatureName + " if " + activater.getName() + " is " + status.toString());
+		try {
+			this.creature = (Creature) EntityManager.getEntity(creatureName);
+		} catch (Exception e) {
+			System.err.println("TakeFromInventory: <" + creatureName + "> is no valid CreatureName");
+		}
+		try {
+			this.thing = (Thing) EntityManager.getEntity(thingName);
+		} catch (Exception e) {
+			System.err.println("TakeFromInventory: <" + thingName + "> is no valid Thing");
+		}
 	}
 
 	@Override
