@@ -1,6 +1,7 @@
 package GameEventEngine.Events.EventTypes;
 
 import Entites.EntityTypes.Entity;
+import Entity.Main.EntityManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.Event.Transistion;
@@ -10,11 +11,11 @@ public class EntityGetsToPosition extends Event{
 	private int y;
 	private Entity entity;
 	
-	public EntityGetsToPosition(String name, Entity entity, int x, int y) {
+	public EntityGetsToPosition(String name, String entityName, int x, int y) {
 		super(name , "try to find this Position on the Map!");
 		this.x = x;
 		this.y = y;
-		this.entity = entity;
+		this.entity = EntityManager.getEntity(entityName);
 		transistion = new Transistion(this);
 	}
 	

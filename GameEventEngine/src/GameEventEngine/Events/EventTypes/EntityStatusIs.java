@@ -2,6 +2,7 @@ package GameEventEngine.Events.EventTypes;
 
 import Entites.EntityTypes.Entity;
 import Entites.EntityTypes.Status;
+import Entity.Main.EntityManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Event.Event_Status;
 import GameEventEngine.Events.Event.Transistion;
@@ -14,28 +15,28 @@ public class EntityStatusIs extends Event{
 	private String sValue = null;
 	private Status.Type type = null;
 	
-	public EntityStatusIs(String name, Entity entity, String varName, int value) {
-		super(name , "gets true if " + entity.getName() + "." + varName + "=" + value);
+	public EntityStatusIs(String name, String entityName, String varName, int value) {
+		super(name , "gets true if " + entityName + "." + varName + "=" + value);
 		this.varName = varName;
 		this.iValue = value;
 		type = Status.Type.INT;
-		this.entity = entity;
+		this.entity = EntityManager.getEntity(entityName);
 		transistion = new Transistion(this);
 	}
 	
-	public EntityStatusIs(String name, Entity entity, String varName, boolean value) {
-		super(name , "gets true if " + entity.getName() + "." + varName + "=" + value);
+	public EntityStatusIs(String name, String entityName, String varName, boolean value) {
+		super(name , "gets true if " + entityName + "." + varName + "=" + value);
 		this.bValue = value;
 		type = Status.Type.BOOL;
-		this.entity = entity;
+		this.entity = EntityManager.getEntity(entityName);
 		transistion = new Transistion(this);
 	}
 	
-	public EntityStatusIs(String name, Entity entity, String varName, String value) {
-		super(name , "gets true if " + entity.getName() + "." + varName + "=" + value);
+	public EntityStatusIs(String name, String entityName, String varName, String value) {
+		super(name , "gets true if " + entityName + "." + varName + "=" + value);
 		this.sValue = value;
 		type = Status.Type.STRING;
-		this.entity = entity;
+		this.entity = EntityManager.getEntity(entityName);
 		transistion = new Transistion(this);
 	}
 	
