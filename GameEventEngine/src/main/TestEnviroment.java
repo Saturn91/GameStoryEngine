@@ -1,7 +1,7 @@
 package main;
 
-import Entites.Creature;
-import Entites.Thing;
+import Entites.EntityTypes.Creature;
+import Entites.EntityTypes.Thing;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;

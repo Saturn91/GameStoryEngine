@@ -2,7 +2,8 @@ package GameEventEngine;
 
 import java.util.ArrayList;
 
-import Entites.Entity;
+import Entites.EntityTypes.Entity;
+import Entity.Main.EntityManager;
 import GameEventEngine.Actions.Main.ActionManager;
 import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;
@@ -18,11 +19,13 @@ public class StoryManager {
 	private EventManager evma;
 	private ActionManager acma;
 	private DialogManager dima;
+	private EntityManager enma;
 	
 	public StoryManager() {
 		evma = new EventManager();
 		acma = new ActionManager();
 		dima = new DialogManager();
+		enma = new EntityManager();
 	}
 	
 	public EventManager getEventManager(){
@@ -35,6 +38,10 @@ public class StoryManager {
 	
 	public DialogManager getDialogManager(){
 		return dima;
+	}
+	
+	public EntityManager getEntityManager(){
+		return enma;
 	}
 	
 	public void update(){
