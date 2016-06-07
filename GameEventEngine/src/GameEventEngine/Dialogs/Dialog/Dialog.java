@@ -35,7 +35,15 @@ public class Dialog {
 	}
 	
 	public void addTransition(String originText, Event event, String textName){
-		getTransitionTrackerOf(originText).addTransition(event, textName);
+		if(textNameList.contains(originText)){
+			if(textNameList.contains(textName)){
+				getTransitionTrackerOf(originText).addTransition(event, textName);
+			}else{
+				System.err.println("Dialog: <" + textName + "> no valid Text!");
+			}
+		}else{
+			System.err.println("Dialog: <" + originText + "> no valid Text!");
+		}
 	}
 	
 	public void addText(String name, String text){
@@ -47,10 +55,18 @@ public class Dialog {
 		}
 	}
 	
-	public void addOption(String optionText, String OriginTextName, String DestinationTextName){
-		optionList.add(new Option(optionText, textList.get(textNameList.indexOf(OriginTextName)), 
-				textList.get(textNameList.indexOf(DestinationTextName))));
-		textList.get(textNameList.indexOf(OriginTextName)).addOptions();
+	public void addOption(String optionText, String originTextName, String destinationTextName){
+		if(textNameList.contains(originTextName)){
+			if(textNameList.contains(destinationTextName)){
+				optionList.add(new Option(optionText, textList.get(textNameList.indexOf(originTextName)), 
+						textList.get(textNameList.indexOf(destinationTextName))));
+				textList.get(textNameList.indexOf(originTextName)).addOptions();
+			}else{
+				System.err.println("Dialog: <" + destinationTextName + "> is no valid TextName!");
+			}
+		}else{
+			System.err.println("Dialog: <" + originTextName + "> is no valid TextName!");
+		}
 	}
 	
 	public Text getText(String name){
@@ -116,7 +132,6 @@ public class Dialog {
 				actualText = o.choose();
 			}
 		}
-		//actualText = optionList.get(optionName.indexOf(optionName)).choose();
 	}
 	
 	public boolean actualTextIsBye(){

@@ -2,6 +2,7 @@ package main;
 
 import Entites.EntityTypes.Creature;
 import Entites.EntityTypes.Thing;
+import Entity.Main.EntityManager;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;
@@ -13,27 +14,27 @@ public class TestEnviroment {
 		syma = new StoryManager();
 		
 		//Creatures
-		Creature player = new Creature("Player", 10);
-		Creature watchMan = new Creature("WatchMan", 15);
-		Creature lady = new Creature("Lady", 5);
+		syma.getEntityManager().addEntity(new Creature("Player", 10));
+		syma.getEntityManager().addEntity(new Creature("Watchman", 15));
+		syma.getEntityManager().addEntity(new Creature("Lady", 5));
 		
 		//Things
-		Thing dagger = new Thing("Dagger");
-		Thing key = new Thing("Key");
-		Thing sword = new Thing("Sword");
-		Thing ring = new Thing("Ring");
+		syma.getEntityManager().addEntity(new Thing("Dagger"));
+		syma.getEntityManager().addEntity(new Thing("Key"));
+		syma.getEntityManager().addEntity(new Thing("Sword"));
+		syma.getEntityManager().addEntity(new Thing("Ring"));
 				
 		//Events
-		syma.getEventManager().addHasInInventory("E1", player, dagger);
-		syma.getEventManager().addHasInInventory("E2", player, key);
-		syma.getEventManager().addDeathOfEntity("E3", watchMan);
-		syma.getEventManager().addEntityGetsToPosition("E4", player, 10, 10);
-		syma.getEventManager().addTextRead("E5", "T4", lady);
+		syma.getEventManager().addHasInInventory("E1", "Player", "Dagger");
+		syma.getEventManager().addHasInInventory("E2", "Player", "Key");
+		syma.getEventManager().addDeathOfEntity("E3", "Watchman");
+		syma.getEventManager().addEntityGetsToPosition("E4", "Player", 10, 10);
+		syma.getEventManager().addTextRead("E5", "T4", "Lady");
 		
 		//Actions
-		syma.getActionManager().addGive(player, sword, Event.getEventByName("E3"));
-		syma.getActionManager().addTake(player, sword, Event.getEventByName("E4"));
-		syma.getActionManager().addGive(player, ring, Event.getEventByName("E5"));
+		syma.getActionManager().addGive("Player", "Sword", Event.getEventByName("E3"));
+		syma.getActionManager().addTake("Player", "Sword", Event.getEventByName("E4"));
+		syma.getActionManager().addGive("Player", "Ring", Event.getEventByName("E5"));
 		
 		//setTransitions
 		syma.getEventManager().addEventBefore("E1", Event.getEventByName(Event.START_TAG));
@@ -44,47 +45,47 @@ public class TestEnviroment {
 		syma.getEventManager().addEventBefore("E5", Event.getEventByName("E4"));
 		
 		//Dialog
-		syma.getDialogManager().addDialog(lady);
-		syma.getDialogManager().getDialog(lady).addText("T1", "Hi How are you?");
-		syma.getDialogManager().getDialog(lady).addText("T2", "Kill the watchman!");
-		syma.getDialogManager().getDialog(lady).addText("T3", "Oh thank you for killing the Watchman, want my Ring?");
-		syma.getDialogManager().getDialog(lady).addText("T4", "Here you go");
-		syma.getDialogManager().getDialog(lady).addText("T5", "well then farewell!");
+		syma.getDialogManager().addDialog("Lady");
+		syma.getDialogManager().getDialog("Lady").addText("T1", "Hi How are you?");
+		syma.getDialogManager().getDialog("Lady").addText("T2", "Kill the watchman!");
+		syma.getDialogManager().getDialog("Lady").addText("T3", "Oh thank you for killing the Watchman, want my Ring?");
+		syma.getDialogManager().getDialog("Lady").addText("T4", "Here you go");
+		syma.getDialogManager().getDialog("Lady").addText("T5", "well then farewell!");
 		
 		//Transitions
-		syma.getDialogManager().getDialog(lady).addTransitionTracker("T1", "T2");
-		syma.getDialogManager().getDialog(lady).addTransition("T1", new DeathOfEntity("E6", watchMan), "T3");
+		syma.getDialogManager().getDialog("Lady").addTransitionTracker("T1", "T2");
+		syma.getDialogManager().getDialog("Lady").addTransition("T1", new DeathOfEntity("E6", "Watchman"), "T3");
 		
 		//Options
-		syma.getDialogManager().getDialog(lady).addOption("Yes", "T3", "T4");
-		syma.getDialogManager().getDialog(lady).addOption("No", "T3", "T5");
-		syma.getDialogManager().getDialog(lady).setTextBye("T4", true);
+		syma.getDialogManager().getDialog("Lady").addOption("Yes", "T3", "T4");
+		syma.getDialogManager().getDialog("Lady").addOption("No", "T3", "T5");
+		syma.getDialogManager().getDialog("Lady").setTextBye("T4", true);
 		
 		//EntryPoint
-		syma.getDialogManager().getDialog(lady).setReEntryText("T1");
+		syma.getDialogManager().getDialog("Lady").setReEntryText("T1");
 		
 	//RUN
 		syma.getEventManager().printStatus();
 		updatePrint();
-		player.addToInventory(dagger.getID());
+		EntityManager.getEntity("Player").addToInventory("Dagger");
 		updatePrint();
-		player.addToInventory(key.getID());
+		EntityManager.getEntity("Player").addToInventory("Key");
 		updatePrint();
-		watchMan.kill();
+		EntityManager.getEntity("Watchman").kill();
 		updatePrint();
-		System.out.println("-----------------player has Sword in inventory: " + player.hasinInventory(sword.getID()));
-		player.setPosition(10, 10);
+		System.out.println("-----------------player has Sword in inventory: " + EntityManager.getEntity("Player").hasinInventory("Sword"));
+		EntityManager.getEntity("Player").setPosition(10, 10);
 		updatePrint();
-		System.out.println("-----------------player has Sword in inventory: " + player.hasinInventory(sword.getID()));
-		syma.getDialogManager().openDialog(lady);
+		System.out.println("-----------------player has Sword in inventory: " + EntityManager.getEntity("Player").hasinInventory("Sword"));
+		syma.getDialogManager().openDialog("Lady");
 		print();
 		syma.getDialogManager().getNextText();
 		print();
 		syma.getDialogManager().choosOption("No");
 		print();
 		syma.getDialogManager().closeDialog();
-		System.out.println("-----------------player has Ring in inventory: " + player.hasinInventory(ring.getID()));
-		syma.getDialogManager().openDialog(lady);
+		System.out.println("-----------------player has Ring in inventory: " + EntityManager.getEntity("Player").hasinInventory("Ring"));
+		syma.getDialogManager().openDialog("Lady");
 		print();
 		syma.getDialogManager().getNextText();
 		print();
@@ -93,7 +94,7 @@ public class TestEnviroment {
 		syma.getDialogManager().getNextText();
 		print();
 		updatePrint();
-		System.out.println("-----------------player has Ring in inventory: " + player.hasinInventory(ring.getID()));
+		System.out.println("-----------------player has Ring in inventory: " + EntityManager.getEntity("Player").hasinInventory("Ring"));
 	}
 	
 	public static void print(){

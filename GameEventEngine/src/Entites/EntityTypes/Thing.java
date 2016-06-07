@@ -11,9 +11,9 @@ public class Thing extends Entity{
 	}
 	
 	@Override
-	public void addToInventory(long id) {
+	public void addToInventory(String name) {
 		if(isContainer){
-			super.addToInventory(id);
+			super.addToInventory(name);
 		}else{
 			System.out.println("you can not store that in " + super.getName());
 		}

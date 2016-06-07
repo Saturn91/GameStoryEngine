@@ -41,7 +41,7 @@ public class TakeFromInventory extends Action{
 
 	@Override
 	public void execute() {
-		creature.takefromInventory(thing.getID());
+		creature.takefromInventory(thing.getName());
 	}
 
 }
