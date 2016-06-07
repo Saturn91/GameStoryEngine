@@ -21,25 +21,25 @@ public class EventManager {
 		eventList.add(new StartEvent());
 	}
 	
-	public void addEntityGetsToPosition(String name, Entity entity, int x, int y){
-		EntityGetsToPosition gtp = new EntityGetsToPosition(name, entity, x, y);
+	public void addEntityGetsToPosition(String name, String entityName, int x, int y){
+		EntityGetsToPosition gtp = new EntityGetsToPosition(name, entityName, x, y);
 		eventList.add(gtp);
 	}
 	
-	public void addDeathOfEntity(String name, Entity entity){
-		eventList.add(new DeathOfEntity(name, entity));
+	public void addDeathOfEntity(String name, String entityName){
+		eventList.add(new DeathOfEntity(name, entityName));
 	}
 	
-	public void addHasInInventory(String name, Entity entity, Entity inInventory){
-		eventList.add(new EntityHasInInvetory(name, entity, inInventory));
+	public void addHasInInventory(String name, String entityName, String inInventory){
+		eventList.add(new EntityHasInInvetory(name, entityName, inInventory));
 	}
 	
-	public void addIsStatus(String name, Entity entity, String varName, int value){
-		eventList.add(new EntityStatusIs(name, entity, varName, value));
+	public void addIsStatus(String name, String entityName, String varName, int value){
+		eventList.add(new EntityStatusIs(name, entityName, varName, value));
 	}
 	
-	public void addTextRead(String name, String textName, Creature creature){
-		eventList.add(new TextSeenByPlayer(name, textName, creature));
+	public void addTextRead(String name, String textName, String creatureName){
+		eventList.add(new TextSeenByPlayer(name, textName, creatureName));
 	}
 	
 	public void addEventBefore(String name, Event event){
