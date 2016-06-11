@@ -15,13 +15,6 @@ public class TestEnviroment {
 	public static void main(String[] args) {
 		stin = new StoryInterpreter("./res/Story");
 		syma = stin.compile();
-				
-		//Events
-		syma.getEventManager().addHasInInventory("E1", "Player", "Dagger");
-		syma.getEventManager().addHasInInventory("E2", "Player", "Key");
-		syma.getEventManager().addDeathOfEntity("E3", "Watchman");
-		syma.getEventManager().addEntityGetsToPosition("E4", "Player", 10, 10);
-		syma.getEventManager().addTextRead("E5", "T4", "Lady");
 		
 		//Actions
 		syma.getActionManager().addGive("Player", "Sword", Event.getEventByName("E3"));

@@ -15,6 +15,7 @@ import GameEventEngine.Events.EventTypes.TextSeenByPlayer;
 
 public class EventManager {
 	ArrayList<Event> eventList = new ArrayList<>();
+	ArrayList<String> names = new ArrayList<>();
 	
 	public EventManager() {
 		//create the First Event to initialize the Story 
@@ -22,24 +23,38 @@ public class EventManager {
 	}
 	
 	public void addEntityGetsToPosition(String name, String entityName, int x, int y){
-		EntityGetsToPosition gtp = new EntityGetsToPosition(name, entityName, x, y);
-		eventList.add(gtp);
+		if(checkName(name)){
+			names.add(name);
+			eventList.add(new EntityGetsToPosition(name, entityName, x, y));
+		}		
 	}
 	
 	public void addDeathOfEntity(String name, String entityName){
-		eventList.add(new DeathOfEntity(name, entityName));
+		if(checkName(name)){
+			names.add(name);
+			eventList.add(new DeathOfEntity(name, entityName));
+		}
 	}
 	
 	public void addHasInInventory(String name, String entityName, String inInventory){
-		eventList.add(new EntityHasInInvetory(name, entityName, inInventory));
+		if(checkName(name)){
+			names.add(name);
+			eventList.add(new EntityHasInInvetory(name, entityName, inInventory));
+		}
 	}
 	
 	public void addIsStatus(String name, String entityName, String varName, int value){
-		eventList.add(new EntityStatusIs(name, entityName, varName, value));
+		if(checkName(entityName)){
+			names.add(name);
+			eventList.add(new EntityStatusIs(name, entityName, varName, value));
+		}
 	}
 	
 	public void addTextRead(String name, String textName, String creatureName){
-		eventList.add(new TextSeenByPlayer(name, textName, creatureName));
+		if(checkName(name)){
+			names.add(name);
+			eventList.add(new TextSeenByPlayer(name, textName, creatureName));
+		}
 	}
 	
 	public void addEventBefore(String name, Event event){
@@ -47,7 +62,7 @@ public class EventManager {
 	}
 	
 	public void addEventBeforeOR(String name, Event event, int branch){
-		Event.getEventByName(name).addEventBeforeOR(event, branch);
+		Event.getEventByName(name).addEventBeforeOR(event, branch);	
 	}
 	
 	public void update(){
@@ -55,6 +70,19 @@ public class EventManager {
 			e.update();
 		}
 	}
+	
+	private boolean checkName(String name){
+		for(int i = 0; i < names.size(); i++){
+			if(names.get(i).equals(name)){
+				System.err.println("EventManager: <" + name + "> does already exist!");
+				return false;
+			}
+		}
+		return true;		
+	}
+	
+	
+	//********************************Debuging ***************************************
 	
 	public void printStatus(){
 		System.out.println("********************************************************");

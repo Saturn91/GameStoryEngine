@@ -267,7 +267,7 @@ public class SaveSystem {
 	}
 	
 	/**
-	 * returns how many lines exists
+	 * returns how many lines exists Attention empty lines are not counted!
 	 */
 	public int getLineNum(){
 		return loadBuffer.length;
