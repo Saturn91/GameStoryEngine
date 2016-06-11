@@ -7,22 +7,14 @@ import GameEventEngine.StoryManager;
 import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.EventTypes.DeathOfEntity;
+import Interpreter.StoryInterpreter;
 
 public class TestEnviroment {
 	private static StoryManager syma;
+	private static StoryInterpreter stin;
 	public static void main(String[] args) {
-		syma = new StoryManager();
-		
-		//Creatures
-		syma.getEntityManager().addEntity(new Creature("Player", 10));
-		syma.getEntityManager().addEntity(new Creature("Watchman", 15));
-		syma.getEntityManager().addEntity(new Creature("Lady", 5));
-		
-		//Things
-		syma.getEntityManager().addEntity(new Thing("Dagger"));
-		syma.getEntityManager().addEntity(new Thing("Key"));
-		syma.getEntityManager().addEntity(new Thing("Sword"));
-		syma.getEntityManager().addEntity(new Thing("Ring"));
+		stin = new StoryInterpreter("./res/Story");
+		syma = stin.compile();
 				
 		//Events
 		syma.getEventManager().addHasInInventory("E1", "Player", "Dagger");

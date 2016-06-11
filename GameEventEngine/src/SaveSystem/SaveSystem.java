@@ -266,6 +266,13 @@ public class SaveSystem {
 		}
 	}
 	
+	/**
+	 * returns how many lines exists
+	 */
+	public int getLineNum(){
+		return loadBuffer.length;
+	}
+	
 	//*********************************** other Methodes *******************************************
 	
 	/**
