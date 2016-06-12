@@ -14,6 +14,7 @@ import GameEventEngine.Events.Event.Event_Status;
 
 public class ActionManager {
 	ArrayList<Action> actionList = new ArrayList<>();
+	ArrayList<String> names = new ArrayList<>();
 	
 	public void addKill( String creatureName, Event activater){
 		actionList.add(new Kill(creatureName, activater));
@@ -53,6 +54,7 @@ public class ActionManager {
 		}
 	}
 	
+	//**********************************Debuging *********************
 	public void printStatus(){
 		for(Action a: actionList){
 			a.print();

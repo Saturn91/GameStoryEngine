@@ -7,8 +7,12 @@ addThing: Key;
 addThing: Sword;
 addThing: Ring;
 
-addEvent: inInventory E1 Player Dagger;
-addEvent: inInventory E2 Player Key;
+addEvent: InInventory E1 Player Dagger;
+addEvent: InInventory E2 Player Key;
 addEvent: DeathOf E3 Watchman;
 addEvent: Pos E4 Player 10 10;
 addEvent: Read E5 T4 Lady;
+
+addAction: Give Player Sword E3;
+addAction: Take Player Sword E4;
+addAction: Give Player Ring E5;

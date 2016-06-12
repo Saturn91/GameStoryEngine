@@ -16,11 +16,6 @@ public class TestEnviroment {
 		stin = new StoryInterpreter("./res/Story");
 		syma = stin.compile();
 		
-		//Actions
-		syma.getActionManager().addGive("Player", "Sword", Event.getEventByName("E3"));
-		syma.getActionManager().addTake("Player", "Sword", Event.getEventByName("E4"));
-		syma.getActionManager().addGive("Player", "Ring", Event.getEventByName("E5"));
-		
 		//setTransitions
 		syma.getEventManager().addEventBefore("E1", Event.getEventByName(Event.START_TAG));
 		syma.getEventManager().addEventBefore("E2", Event.getEventByName(Event.START_TAG));

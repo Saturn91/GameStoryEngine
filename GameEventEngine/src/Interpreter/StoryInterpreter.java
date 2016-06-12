@@ -3,6 +3,8 @@ package Interpreter;
 import Entites.EntityTypes.Creature;
 import Entites.EntityTypes.Thing;
 import GameEventEngine.StoryManager;
+import GameEventEngine.Events.Event.Event;
+import GameEventEngine.Events.Main.EventManager;
 import SaveSystem.SaveSystem;
 
 public class StoryInterpreter {
@@ -28,6 +30,7 @@ public class StoryInterpreter {
 		reader.readFile(pathFile);
 		buildEntities();
 		buildEvents();
+		buildActions();
 	}
 
 	private void buildEntities(){
@@ -74,10 +77,25 @@ public class StoryInterpreter {
 		System.out.println("StoryInterpreter: tried to create " + lines.length + " Events - failed: " + errorCounter);
 	}
 	
+	private void buildActions() {
+		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addAction + ":");
+		String[] args;
+		for(int i = 0; i < lines.length; i++){			
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(!addAction(args)){
+				errorCounter ++;
+				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument");
+			}
+					
+		}
+		
+		System.out.println("StoryInterpreter: tried to create " + lines.length + " Actions - failed: " + errorCounter);
+	}
+	
 	private boolean addEvent(String[] args){
 		try {
 			switch(args[1]){
-				case "inInventory": {
+				case "InInventory": {
 					syma.getEventManager().addHasInInventory(args[2], args[3], args[4]);
 					break;
 				}
@@ -96,6 +114,30 @@ public class StoryInterpreter {
 					syma.getEventManager().addTextRead(args[2], args[3], args[4]);
 					break;
 				}				
+				
+				default: {
+					return false;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
+	
+	private boolean addAction(String[] args){
+		try {
+			switch(args[1]){
+				case "Give": {
+					syma.getActionManager().addGive(args[2], args[3], Event.getEventByName(args[4]));
+					break;
+				}
+				
+				case "Take": {
+					syma.getActionManager().addTake(args[2], args[3], Event.getEventByName(args[4]));
+					break;
+				}
 				
 				default: {
 					return false;
