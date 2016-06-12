@@ -1,0 +1,5 @@
+addText: T1 "Hi How are you?";
+addText: T2 "Kill the watchman!";
+addText: T3 "Oh thank you for killing the Watchman, want my Ring?";
+addText: T4 "Here you go";
+addText: T5 "well then farewell!";

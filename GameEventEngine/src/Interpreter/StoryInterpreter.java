@@ -2,6 +2,7 @@ package Interpreter;
 
 import Entites.EntityTypes.Creature;
 import Entites.EntityTypes.Thing;
+import Entity.Main.EntityManager;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Main.EventManager;
@@ -12,6 +13,7 @@ public class StoryInterpreter {
 	private String pathFile;
 	private StoryManager syma;
 	private SaveSystem reader;
+	private DialogInterpreter diin;
 	private int errorCounter;
 	
 	public StoryInterpreter(String filePath) {
@@ -31,6 +33,7 @@ public class StoryInterpreter {
 		buildEntities();
 		buildEvents();
 		buildActions();
+		buildDialog();
 	}
 
 	private void buildEntities(){
@@ -105,6 +108,41 @@ public class StoryInterpreter {
 		System.out.println("StoryInterpreter: tried to create " + lines.length + " Actions - failed: " + errorCounter);
 	}
 	
+	private void buildDialog(){
+		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addDialog + ":");
+		String[] args;
+		for(int i = 0; i < lines.length; i++){			
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(EntityManager.getEntity(args[1]) != null){
+				try {
+					Creature creature = (Creature) EntityManager.getEntity(args[1]);
+					diin = new DialogInterpreter(args[1], args[2]);
+					if(diin.isValidPath()){
+						creature.addDialog();
+						dialogInterpreter();
+					}else{
+						errorCounter ++;
+						System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unvalid Path");
+					}					
+				} catch (Exception e) {
+					errorCounter ++;
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Entity isn't a Creature");
+				}
+				
+			}else{
+				errorCounter ++;
+				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unknown Entity");
+			}
+					
+		}
+		
+		System.out.println("StoryInterpreter: tried to create " + lines.length + " Dialogs - failed: " + errorCounter);
+	}
+	
+	private void dialogInterpreter() {
+		syma = diin.compileTo(syma);		
+	}
+
 	private boolean addEvent(String[] args){
 		try {
 			switch(args[1]){

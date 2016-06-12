@@ -46,12 +46,14 @@ public class Dialog {
 		}
 	}
 	
-	public void addText(String name, String text){
+	public boolean addText(String name, String text){
 		if(!textNameList.contains(name)){
 			textList.add(new Text(name, text));
 			textNameList.add(name);
+			return true;
 		}else{
 			System.err.println("Dialog: <" + name + "> is already defined as a text!");
+			return false;
 		}
 	}
 	

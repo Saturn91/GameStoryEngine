@@ -107,18 +107,19 @@ public class SaveSystem {
 	 * read the File at loadpath with the ending decleared in the constructor
 	 * @param loadpath -> for Example "./saves/FILE_NAME"
 	 */
-	public void readFile(String loadpath){
+	public boolean readFile(String loadpath){
 		clearLoadBuffer();
 		this.loadpath = loadpath;
 		
 		String loadString ="";
 		try {
 			loadString = readTextFile();
+			loadBuffer = loadString.split("\n");
+			return true;
 		} catch (IOException e) {
 			System.err.println("coudn't load " + loadpath + "." + ending);
+			return false;
 		}
-		
-		loadBuffer = loadString.split("\n");
 	}
 	
 	/**

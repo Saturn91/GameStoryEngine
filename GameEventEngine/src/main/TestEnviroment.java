@@ -15,15 +15,7 @@ public class TestEnviroment {
 	public static void main(String[] args) {
 		stin = new StoryInterpreter("./res/Story");
 		syma = stin.compile();
-		
-		//Dialog
-		syma.getDialogManager().addDialog("Lady");
-		syma.getDialogManager().getDialog("Lady").addText("T1", "Hi How are you?");
-		syma.getDialogManager().getDialog("Lady").addText("T2", "Kill the watchman!");
-		syma.getDialogManager().getDialog("Lady").addText("T3", "Oh thank you for killing the Watchman, want my Ring?");
-		syma.getDialogManager().getDialog("Lady").addText("T4", "Here you go");
-		syma.getDialogManager().getDialog("Lady").addText("T5", "well then farewell!");
-		
+				
 		//Transitions
 		syma.getDialogManager().getDialog("Lady").addTransitionTracker("T1", "T2");
 		syma.getDialogManager().getDialog("Lady").addTransition("T1", new DeathOfEntity("E6", "Watchman"), "T3");

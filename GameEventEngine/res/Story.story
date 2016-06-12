@@ -23,3 +23,5 @@ addEventBefore: E3 E1;
 addEventBefore: E4 E3;
 addEventBefore: E4 E2;
 addEventBefore: E5 E4;
+
+addDialog: Lady ./res/Dialogs/lady;
