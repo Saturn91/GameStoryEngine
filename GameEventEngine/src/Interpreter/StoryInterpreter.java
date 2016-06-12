@@ -126,7 +126,7 @@ public class StoryInterpreter {
 					}					
 				} catch (Exception e) {
 					errorCounter ++;
-					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Entity isn't a Creature");
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Error while compiling Dialog for " + args[1]);
 				}
 				
 			}else{

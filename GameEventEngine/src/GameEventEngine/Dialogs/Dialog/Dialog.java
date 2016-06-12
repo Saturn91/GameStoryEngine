@@ -17,32 +17,39 @@ public class Dialog {
 		actualText = startTag;
 	}
 	
-	public void addTransitionTracker(String originText, String defaultText){
+	public boolean addTransitionTracker(String originText, String defaultText){
 		if(textNameList.contains(originText)){
 			if(textNameList.contains(defaultText)){
 				if(!getText(originText).hasTransitionTracker()){
 					textTranistionTrackers.add(new TextTransitionTracker(originText, defaultText));
 					getText(originText).addTransitionTracker();
+					return true;
 				}else{
 					System.err.println("Dialog: <" + originText + "> has already a TransitionTracker!");
+					return false;
 				}
 			}else{
 				System.err.println("Dialog: <" + defaultText + "> is no valid textname!");
+				return false;
 			}
 		}else{
 			System.err.println("Dialog: <" + originText + "> is no valid textname!");
+			return false;
 		}
 	}
 	
-	public void addTransition(String originText, Event event, String textName){
+	public boolean addTransition(String originText, Event event, String textName){
 		if(textNameList.contains(originText)){
 			if(textNameList.contains(textName)){
 				getTransitionTrackerOf(originText).addTransition(event, textName);
+				return true;
 			}else{
 				System.err.println("Dialog: <" + textName + "> no valid Text!");
+				return false;
 			}
 		}else{
 			System.err.println("Dialog: <" + originText + "> no valid Text!");
+			return false;
 		}
 	}
 	

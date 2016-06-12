@@ -1,6 +1,13 @@
 package Interpreter;
 
+import java.util.ArrayList;
+
 import GameEventEngine.StoryManager;
+import GameEventEngine.Events.Event.Event;
+import GameEventEngine.Events.EventTypes.DeathOfEntity;
+import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
+import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
+import GameEventEngine.Events.EventTypes.TextSeenByPlayer;
 import SaveSystem.SaveSystem;
 
 public class DialogInterpreter {
@@ -10,6 +17,7 @@ public class DialogInterpreter {
 	private StoryManager syma;
 	private int errorCounter;
 	private int countLines;
+	private ArrayList<Event> watchEvents = new ArrayList<>();
 	
 	public DialogInterpreter(String creatureName, String filePath) {
 		reader = new SaveSystem(filePath, "dia");
@@ -25,9 +33,10 @@ public class DialogInterpreter {
 		this.syma = syma;
 		countLines = 0;
 		errorCounter = 0;
-		addText();		
-		
-		System.out.println("DialogInterpreter: tried to create " + countLines + " Texts for " + creature + " - failed: " + errorCounter);		
+		addText();
+		addEvents();
+		addTransitions();
+		System.out.println("DialogInterpreter: tried to compile " + countLines + " Commands for " + creature + " - failed: " + errorCounter);		
 		return this.syma;
 	}
 
@@ -48,6 +57,97 @@ public class DialogInterpreter {
 				errorCounter ++;
 				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " no '\"' in line found! ");
 			}
+		}
+	}
+	
+	private void addEvents() {
+		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addEvent + ":");
+		String[] args;
+		for(int i = 0; i < lines.length; i++){	
+			countLines++;
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(!addEvent(args)){
+				errorCounter ++;
+				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument");
+			}
+					
+		}
+		System.out.println("DialogInterpreter: tried to create " + lines.length + " Events - failed: " + errorCounter);
+	}
+	
+	private void addTransitions() {
+		int[] lines = reader.getPrefixLinePositions(DialogPrefixes.addTransitionTracker + ":");
+		String[] args;
+		for(int i = 0; i < lines.length; i++){
+			countLines++;
+			args = reader.loadLine(lines[i]).split(" |;");	
+			if(args.length >= 3){
+				if(!syma.getDialogManager().getDialog(creature).addTransitionTracker(args[1], args[2])){
+					errorCounter ++;
+					System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " unvalid TextName");
+				}
+			}else{
+				errorCounter ++;
+				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " not enough arguments");
+			}
+		}	
+		
+		lines = reader.getPrefixLinePositions(DialogPrefixes.addTransition + ":");
+		for(int i = 0; i < lines.length; i++){
+			countLines++;
+			args = reader.loadLine(lines[i]).split(" |;");	
+			if(args.length >= 4){
+				if(!syma.getDialogManager().getDialog(creature).addTransition(args[1], getEvent(args[2]), args[3])){
+					errorCounter ++;
+					System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " unvalid TextName");
+				}
+			}else{
+				errorCounter ++;
+				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " not enough arguments");
+			}
+		}
+	}
+	
+	private Event getEvent(String name){
+		for(int i = 0; i < watchEvents.size(); i++){
+			if(watchEvents.get(i).getName().equals(name)){
+				return watchEvents.get(i);
+			}
+		}
+		
+		return Event.getEventByName(name);
+	}
+	
+	private boolean addEvent(String[] args){
+		try {
+			switch(args[1]){
+				case "InInventory": {
+					watchEvents.add(new EntityHasInInvetory(args[2], args[3], args[4]));
+					break;
+				}
+				
+				case "DeathOf": {
+					watchEvents.add(new DeathOfEntity(args[2], args[3]));
+					break;
+				}
+				
+				case "Pos": {
+					watchEvents.add(new EntityGetsToPosition(args[2], args[3], Integer.parseInt(args[4]), Integer.parseInt(args[5])));
+					break;
+				}
+				
+				case "Read": {
+					watchEvents.add(new TextSeenByPlayer(args[2], args[3], args[4]));
+					break;
+				}				
+				
+				default: {
+					return false;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 }

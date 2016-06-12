@@ -15,10 +15,6 @@ public class TestEnviroment {
 	public static void main(String[] args) {
 		stin = new StoryInterpreter("./res/Story");
 		syma = stin.compile();
-				
-		//Transitions
-		syma.getDialogManager().getDialog("Lady").addTransitionTracker("T1", "T2");
-		syma.getDialogManager().getDialog("Lady").addTransition("T1", new DeathOfEntity("E6", "Watchman"), "T3");
 		
 		//Options
 		syma.getDialogManager().getDialog("Lady").addOption("Yes", "T3", "T4");

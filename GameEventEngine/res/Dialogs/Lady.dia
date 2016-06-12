@@ -3,3 +3,11 @@ addText: T2 "Kill the watchman!";
 addText: T3 "Oh thank you for killing the Watchman, want my Ring?";
 addText: T4 "Here you go";
 addText: T5 "well then farewell!";
+
+addEvent: DeathOf E6 Watchman;
+
+addTransitionTracker: T1 T2;
+addTransition: T1 E6 T3;
+
+addOption: "Yes" T3 T4;
+addOption: "No" T3 T5;
