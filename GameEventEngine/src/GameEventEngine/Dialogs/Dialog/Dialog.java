@@ -64,17 +64,20 @@ public class Dialog {
 		}
 	}
 	
-	public void addOption(String optionText, String originTextName, String destinationTextName){
+	public boolean addOption(String optionText, String originTextName, String destinationTextName){
 		if(textNameList.contains(originTextName)){
 			if(textNameList.contains(destinationTextName)){
 				optionList.add(new Option(optionText, textList.get(textNameList.indexOf(originTextName)), 
 						textList.get(textNameList.indexOf(destinationTextName))));
 				textList.get(textNameList.indexOf(originTextName)).addOptions();
+				return true;
 			}else{
 				System.err.println("Dialog: <" + destinationTextName + "> is no valid TextName!");
+				return false;
 			}
 		}else{
 			System.err.println("Dialog: <" + originTextName + "> is no valid TextName!");
+			return false;
 		}
 	}
 	
@@ -99,11 +102,13 @@ public class Dialog {
 		actualText = reEntryText;
 	}
 	
-	public void setReEntryText(String name){
+	public boolean setReEntryText(String name){
 		if(textNameList.contains(name)){
 			reEntryText = name;
+			return true;
 		}else{
 			System.err.println("Dialog: Text:<" + name + "> does not exists -> not able to change reentrypoint! ");
+			return false;
 		}
 	}
 
@@ -157,7 +162,13 @@ public class Dialog {
 		return null;
 	}
 	
-	public void setTextBye(String name, boolean bye){
-		getText(name).setBye(bye);
+	public boolean setTextBye(String name, boolean bye){
+		if(getText(name) != null){
+			getText(name).setBye(bye);
+			return true;
+		}else{
+			return false;
+		}
+		
 	}
 }

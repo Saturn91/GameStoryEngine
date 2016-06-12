@@ -16,14 +16,6 @@ public class TestEnviroment {
 		stin = new StoryInterpreter("./res/Story");
 		syma = stin.compile();
 		
-		//Options
-		syma.getDialogManager().getDialog("Lady").addOption("Yes", "T3", "T4");
-		syma.getDialogManager().getDialog("Lady").addOption("No", "T3", "T5");
-		syma.getDialogManager().getDialog("Lady").setTextBye("T4", true);
-		
-		//EntryPoint
-		syma.getDialogManager().getDialog("Lady").setReEntryText("T1");
-		
 	//RUN
 		syma.getEventManager().printStatus();
 		updatePrint();

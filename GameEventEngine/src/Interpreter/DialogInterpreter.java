@@ -36,6 +36,8 @@ public class DialogInterpreter {
 		addText();
 		addEvents();
 		addTransitions();
+		addOptions();
+		setParameters();
 		System.out.println("DialogInterpreter: tried to compile " + countLines + " Commands for " + creature + " - failed: " + errorCounter);		
 		return this.syma;
 	}
@@ -106,6 +108,58 @@ public class DialogInterpreter {
 				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " not enough arguments");
 			}
 		}
+	}
+	
+	private void addOptions(){
+		int[] lines = reader.getPrefixLinePositions(DialogPrefixes.addOption + ":");
+		String[] args; 
+		for(int i = 0; i < lines.length; i++){
+			countLines++;
+			String[] parts = reader.loadLine(lines[i]).split("\"");
+			args = parts[2].split(" |;");
+			if(args.length >= 2){
+				if(!syma.getDialogManager().getDialog(creature).addOption(parts[1], args[1], args[2])){
+					errorCounter ++;
+					System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " unvalid arguments");
+				}
+			}else{
+				errorCounter ++;
+				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " not enough arguments");
+			}
+		}
+	}
+	
+	private void setParameters() {
+		int[] lines = reader.getPrefixLinePositions(DialogPrefixes.setBye + ":");
+		String[] args; 
+		for(int i = 0; i < lines.length; i++){
+			countLines++;
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(args.length >= 2){
+				if(!syma.getDialogManager().getDialog(creature).setTextBye(args[1], true)){
+					errorCounter ++;
+					System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " unknown Text");
+				}
+			}else{
+				errorCounter ++;
+				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " not enough arguments");
+			}
+		}	
+		
+		lines = reader.getPrefixLinePositions(DialogPrefixes.setDialogEntry + ":");
+		for(int i = 0; i < lines.length; i++){
+			countLines++;
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(args.length >= 2){
+				if(!syma.getDialogManager().getDialog(creature).setReEntryText(args[1])){
+					errorCounter ++;
+					System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " unknown Text");
+				}
+			}else{
+				errorCounter ++;
+				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " not enough arguments");
+			}
+		}	
 	}
 	
 	private Event getEvent(String name){

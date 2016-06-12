@@ -11,3 +11,6 @@ addTransition: T1 E6 T3;
 
 addOption: "Yes" T3 T4;
 addOption: "No" T3 T5;
+
+setBye: T4;
+setDialogEntry: T1;
