@@ -16,14 +16,6 @@ public class TestEnviroment {
 		stin = new StoryInterpreter("./res/Story");
 		syma = stin.compile();
 		
-		//setTransitions
-		syma.getEventManager().addEventBefore("E1", Event.getEventByName(Event.START_TAG));
-		syma.getEventManager().addEventBefore("E2", Event.getEventByName(Event.START_TAG));
-		syma.getEventManager().addEventBefore("E3", Event.getEventByName("E1"));
-		syma.getEventManager().addEventBefore("E4", Event.getEventByName("E3"));
-		syma.getEventManager().addEventBefore("E4", Event.getEventByName("E2"));
-		syma.getEventManager().addEventBefore("E5", Event.getEventByName("E4"));
-		
 		//Dialog
 		syma.getDialogManager().addDialog("Lady");
 		syma.getDialogManager().getDialog("Lady").addText("T1", "Hi How are you?");
