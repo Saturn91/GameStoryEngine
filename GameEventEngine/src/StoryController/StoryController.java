@@ -20,7 +20,6 @@ public class StoryController {
 	
 	public void debug(){
 		syma.printStatus();
-		syma.printStatusActiveEvents();
 	}
 	
 	private long lastTime = 0;

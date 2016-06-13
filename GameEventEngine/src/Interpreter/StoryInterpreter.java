@@ -108,7 +108,7 @@ public class StoryInterpreter {
 			}					
 		}
 		
-		System.out.println("StoryInterpreter: tried to create " + lines.length + " Eventtransistions - failed: " + errorCounter);
+		System.out.println("StoryInterpreter: tried to create " + lines.length + " Event-OR-transistions - failed: " + errorCounter);
 	
 	}
 	
