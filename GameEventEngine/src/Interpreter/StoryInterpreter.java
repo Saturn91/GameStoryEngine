@@ -234,6 +234,17 @@ public class StoryInterpreter {
 					break;
 				}
 				
+				case "Kill": {
+					syma.getActionManager().addKill(args[2], Event.getEventByName(args[3]));
+					break;
+				}
+				
+				case "setReEntry": {
+					syma.getActionManager().addSetReyEntryPointIf(args[2], args[3], Event.getEventByName(args[4]));
+				}
+				
+				
+				
 				default: {
 					return false;
 				}
