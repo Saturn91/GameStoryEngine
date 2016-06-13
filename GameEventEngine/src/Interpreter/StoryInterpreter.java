@@ -183,7 +183,32 @@ public class StoryInterpreter {
 				case "Read": {
 					syma.getEventManager().addTextRead(args[2], args[3], args[4]);
 					break;
-				}				
+				}
+				
+				case "isStatusI":{
+					try {
+						Integer.parseInt(args[5]);
+						syma.getEventManager().addIsStatus(args[2], args[3], args[4], Integer.parseInt(args[5]));
+					} catch (Exception e) {
+						System.err.println("StoryInterpreter: args[5]: <" + args[5] + "> has to be an Integer");
+					}
+				}
+				
+				case "isStatusS":{
+					syma.getEventManager().addIsStatus(args[2], args[3], args[4], args[5]);
+				}
+				
+				case "isStatusB":{
+					if(args[5].equals("true")){
+						syma.getEventManager().addIsStatus(args[2], args[3], args[4], true);
+					}else{
+						if(args[5].equals("false")){
+							syma.getEventManager().addIsStatus(args[2], args[3], args[4], false);
+						}else{
+							System.err.println("StoryInterpreter: args[5]: <" + args[5] + "> has to be a Boolean (true / false");
+						}
+					}					
+				}
 				
 				default: {
 					return false;

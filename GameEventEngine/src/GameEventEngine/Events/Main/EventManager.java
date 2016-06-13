@@ -50,6 +50,20 @@ public class EventManager {
 		}
 	}
 	
+	public void addIsStatus(String name, String entityName, String varName, String value){
+		if(checkName(entityName)){
+			names.add(name);
+			eventList.add(new EntityStatusIs(name, entityName, varName, value));
+		}
+	}
+	
+	public void addIsStatus(String name, String entityName, String varName, boolean value){
+		if(checkName(entityName)){
+			names.add(name);
+			eventList.add(new EntityStatusIs(name, entityName, varName, value));
+		}
+	}
+	
 	public void addTextRead(String name, String textName, String creatureName){
 		if(checkName(name)){
 			names.add(name);
