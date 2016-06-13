@@ -37,7 +37,7 @@ public class StoryInterpreter {
 	}
 
 	private void buildEntities(){
-		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addCreature + ":");
+		int[] lines = reader.getPrefixLinePositions(InterpreterPrefixes.addCreature + ":");
 		String[] args;
 		for(int i = 0; i < lines.length; i++){			
 			args = reader.loadLine(lines[i]).split(" |;");
@@ -51,7 +51,7 @@ public class StoryInterpreter {
 		
 		System.out.println("StoryInterpreter: tried to create " + lines.length + " Creatures - failed: " + errorCounter);
 		
-		lines = reader.getPrefixLinePositions(InterpretorPrefixes.addThing + ":");
+		lines = reader.getPrefixLinePositions(InterpreterPrefixes.addThing + ":");
 		for(int i = 0; i < lines.length; i++){
 			args = reader.loadLine(lines[i]).split(" |;");
 			try {
@@ -66,7 +66,7 @@ public class StoryInterpreter {
 	}
 	
 	private void buildEvents() {
-		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addEvent + ":");
+		int[] lines = reader.getPrefixLinePositions(InterpreterPrefixes.addEvent + ":");
 		String[] args;
 		for(int i = 0; i < lines.length; i++){			
 			args = reader.loadLine(lines[i]).split(" |;");
@@ -79,7 +79,7 @@ public class StoryInterpreter {
 		
 		System.out.println("StoryInterpreter: tried to create " + lines.length + " Events - failed: " + errorCounter);
 		
-		lines = reader.getPrefixLinePositions(InterpretorPrefixes.addEventBefore + ":");
+		lines = reader.getPrefixLinePositions(InterpreterPrefixes.addEventBefore + ":");
 		for(int i = 0; i < lines.length; i++){			
 			args = reader.loadLine(lines[i]).split(" |;");
 			if(Event.getEventByName(args[1]) != null && Event.getEventByName(args[2]) != null){
@@ -94,7 +94,7 @@ public class StoryInterpreter {
 	}
 	
 	private void buildActions() {
-		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addAction + ":");
+		int[] lines = reader.getPrefixLinePositions(InterpreterPrefixes.addAction + ":");
 		String[] args;
 		for(int i = 0; i < lines.length; i++){			
 			args = reader.loadLine(lines[i]).split(" |;");
@@ -109,7 +109,7 @@ public class StoryInterpreter {
 	}
 	
 	private void buildDialog(){
-		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addDialog + ":");
+		int[] lines = reader.getPrefixLinePositions(InterpreterPrefixes.addDialog + ":");
 		String[] args;
 		for(int i = 0; i < lines.length; i++){			
 			args = reader.loadLine(lines[i]).split(" |;");

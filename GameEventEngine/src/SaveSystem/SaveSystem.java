@@ -262,8 +262,8 @@ public class SaveSystem {
 			
 			return output;
 		}else{
-			System.err.println("getPrefixLinePosition: no prefix: \"" + prefix + "\" exists in File " + loadpath + "." + ending);
-			return null;
+			//System.err.println("getPrefixLinePosition: no prefix: \"" + prefix + "\" exists in File " + loadpath + "." + ending);
+			return new int[0];
 		}
 	}
 	

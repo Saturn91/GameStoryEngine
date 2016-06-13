@@ -8,55 +8,55 @@ import GameEventEngine.Dialogs.Main.DialogManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.EventTypes.DeathOfEntity;
 import Interpreter.StoryInterpreter;
+import StoryController.StoryController;
 
 public class TestEnviroment {
-	private static StoryManager syma;
-	private static StoryInterpreter stin;
+	private static StoryController sC;
 	public static void main(String[] args) {
-		stin = new StoryInterpreter("./res/Story");
-		syma = stin.compile();
-		
+		sC = new StoryController("./res/Story");
+		sC.setUpdateTime(0);
 	//RUN
-		syma.getEventManager().printStatus();
-		updatePrint();
+		sC.debug();
+		debugStateMachine();
+		
 		EntityManager.getEntity("Player").addToInventory("Dagger");
-		updatePrint();
+		debugStateMachine();
 		EntityManager.getEntity("Player").addToInventory("Key");
-		updatePrint();
+		debugStateMachine();
 		EntityManager.getEntity("Watchman").kill();
-		updatePrint();
+		debugStateMachine();
 		System.out.println("-----------------player has Sword in inventory: " + EntityManager.getEntity("Player").hasinInventory("Sword"));
 		EntityManager.getEntity("Player").setPosition(10, 10);
-		updatePrint();
+		debugStateMachine();
 		System.out.println("-----------------player has Sword in inventory: " + EntityManager.getEntity("Player").hasinInventory("Sword"));
-		syma.getDialogManager().openDialog("Lady");
-		print();
-		syma.getDialogManager().getNextText();
-		print();
-		syma.getDialogManager().choosOption("No");
-		print();
-		syma.getDialogManager().closeDialog();
+		sC.openDialog("Lady");
+		debugDialog();
+		sC.getNextDialogText();
+		debugDialog();
+		sC.chooseDialogOption("No");
+		debugDialog();
+		sC.closeDialog(); 
 		System.out.println("-----------------player has Ring in inventory: " + EntityManager.getEntity("Player").hasinInventory("Ring"));
-		syma.getDialogManager().openDialog("Lady");
-		print();
-		syma.getDialogManager().getNextText();
-		print();
-		syma.getDialogManager().choosOption("Yes");
-		print();
-		syma.getDialogManager().getNextText();
-		print();
-		updatePrint();
+		sC.openDialog("Lady");
+		debugDialog();
+		sC.getNextDialogText();
+		debugDialog();
+		sC.chooseDialogOption("Yes");
+		debugDialog();
+		sC.getNextDialogText();
+		debugDialog();
+		debugStateMachine();
 		System.out.println("-----------------player has Ring in inventory: " + EntityManager.getEntity("Player").hasinInventory("Ring"));
 	}
 	
-	public static void print(){
-		if(syma.getDialogManager().isDialogOpen()){
+	public static void debugDialog(){
+		if(sC.isDialogOpen()){
 			System.out.println("==================Dialog: =============================");
-			System.out.println(syma.getDialogManager().getOpenDialogText());
-			if(syma.getDialogManager().getOptions().length > 0){
+			System.out.println(sC.getOpenDialogText());	//--
+			if(sC.getOptions().length > 0){
 				System.out.println("==================Option: =============================");
-				for(int i = 0; i < syma.getDialogManager().getOptions().length; i++){
-					System.out.println(i + ": " + syma.getDialogManager().getOptions()[i]);
+				for(int i = 0; i < sC.getOptions().length; i++){
+					System.out.println(i + ": " + sC.getOptions()[i]);
 				}
 			}
 			System.out.println("=======================================================");
@@ -65,8 +65,8 @@ public class TestEnviroment {
 		}
 	}
 	
-	public static void updatePrint(){
-		syma.update();
-		syma.printStatus();
+	public static void debugStateMachine(){
+		sC.tick();
+		sC.debug();
 	}
 }

@@ -63,7 +63,7 @@ public class DialogInterpreter {
 	}
 	
 	private void addEvents() {
-		int[] lines = reader.getPrefixLinePositions(InterpretorPrefixes.addEvent + ":");
+		int[] lines = reader.getPrefixLinePositions(InterpreterPrefixes.addEvent + ":");
 		String[] args;
 		for(int i = 0; i < lines.length; i++){	
 			countLines++;

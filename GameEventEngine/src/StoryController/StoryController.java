@@ -25,7 +25,7 @@ public class StoryController {
 	
 	private long lastTime = 0;
 	private long nowTime;
-	private static final long UPDATETIME = 500;
+	private long updateTime = 500;
 	
 	public void tick(){
 		if(lastTime == 0){
@@ -35,7 +35,7 @@ public class StoryController {
 			nowTime = System.currentTimeMillis();
 		}
 		
-		if(nowTime - lastTime >= UPDATETIME){
+		if(nowTime - lastTime >= updateTime){
 			syma.update();
 		}		
 	}
@@ -68,9 +68,7 @@ public class StoryController {
 		return syma.getDialogManager().getOptions();
 	}
 	
-	
-	
-	
-	
-	
+	public void setUpdateTime(long updateTime){
+		this.updateTime = updateTime;
+	}	
 }
