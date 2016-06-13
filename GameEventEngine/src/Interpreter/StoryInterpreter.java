@@ -91,6 +91,25 @@ public class StoryInterpreter {
 		}
 		
 		System.out.println("StoryInterpreter: tried to create " + lines.length + " Eventtransistions - failed: " + errorCounter);
+	
+		lines = reader.getPrefixLinePositions(InterpreterPrefixes.addEventBeforeOR + ":");
+		for(int i = 0; i < lines.length; i++){			
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(Event.getEventByName(args[1]) != null && Event.getEventByName(args[2]) != null){
+				try {
+					syma.getEventManager().addEventBeforeOR(args[1], Event.getEventByName(args[2]), Integer.parseInt(args[3]));
+				} catch (Exception e) {
+					errorCounter ++;
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) +" : <"+ args[3] + "> has to be an Integer!" );
+				}
+			}else{
+				errorCounter ++;
+				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " undefined Events");
+			}					
+		}
+		
+		System.out.println("StoryInterpreter: tried to create " + lines.length + " Eventtransistions - failed: " + errorCounter);
+	
 	}
 	
 	private void buildActions() {
