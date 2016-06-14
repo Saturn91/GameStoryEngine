@@ -15,7 +15,16 @@ public class Thing extends Entity{
 		if(isContainer){
 			super.addToInventory(name);
 		}else{
-			System.out.println("you can not store that in " + super.getName());
+			System.out.println("you can not store that in NonContainer: " + super.getName());
+		}
+	}
+	
+	public Entity takeFromInventory(String name) {
+		if(isContainer){
+			return super.takefromInventory(name);
+		}else{
+			System.out.println("you can not get that from NonContainer: " + super.getName());
+			return null;
 		}
 	}
 	
