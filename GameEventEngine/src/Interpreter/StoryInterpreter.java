@@ -23,6 +23,14 @@ public class StoryInterpreter {
 	}
 	
 	public StoryManager compile(){
+		System.out.println("----------------------------------------------");
+		System.out.println("|                Interpreter:                 |");
+		System.out.println("|      Point & Klick Adventure-Version        |");
+		System.out.println("|      StoryEngine-Version: Beta_0_0_1        |");
+		System.out.println("|                                             |");
+		System.out.println("|             created by Saturn91             |");
+		System.out.println("|                                             |");
+		System.out.println("----------------------------------------------");
 		buildStoryManager();
 		return syma;
 	}
