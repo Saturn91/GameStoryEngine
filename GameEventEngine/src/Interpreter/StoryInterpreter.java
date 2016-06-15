@@ -25,7 +25,7 @@ public class StoryInterpreter {
 	public StoryManager compile(){
 		System.out.println("----------------------------------------------");
 		System.out.println("|                Interpreter:                 |");
-		System.out.println("|      			                     		  |");
+		System.out.println("|      			 RPG-Version        		  |");
 		System.out.println("|      StoryEngine-Version: Beta_0_0_1        |");
 		System.out.println("|                                             |");
 		System.out.println("|             created by Saturn91             |");
