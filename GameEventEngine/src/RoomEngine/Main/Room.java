@@ -13,6 +13,7 @@ public class Room extends Thing{
 	private ArrayList<Description> descriptions = new ArrayList<>();
 	private static ArrayList<String> descriptionNames = new ArrayList<>();
 	private StringBuilder sb = new StringBuilder();
+	private ArrayList<Event> watchevents = new ArrayList<>();
 	
 	public Room(String name){
 		super("Room: " + name);
@@ -74,8 +75,21 @@ public class Room extends Thing{
 		}
 	}
 	
-	public boolean setDescriptionIF(String descriptionName, Event event, boolean flag){
+	public boolean setDescriptionStoryEventIF(String descriptionName, String eventName, boolean flag){
 		if(descriptionNames.contains(descriptionName)){
+			descriptions.get(descriptionNames.indexOf(descriptionName)).setEvent(Event.getEventByName(eventName), flag);
+			return true;
+		}else{
+			System.err.println("Rooms: <" + descriptionName + "> is not a valuable Description-Name!");
+			return false;
+		}
+		
+	}
+	
+	public boolean setDescriptionWatchEventIF(String descriptionName, Event event, boolean flag){
+		if(descriptionNames.contains(descriptionName)){
+			Event.setEventStatus(event.getName(), Event_Status.ACTIVE);
+			watchevents.add(event);
 			descriptions.get(descriptionNames.indexOf(descriptionName)).setEvent(event, flag);
 			return true;
 		}else{
