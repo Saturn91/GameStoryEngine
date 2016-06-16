@@ -1,4 +1,4 @@
-package Interpreter;
+package Interpreter.Dialog;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,7 @@ import GameEventEngine.Events.EventTypes.DeathOfEntity;
 import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
 import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
 import GameEventEngine.Events.EventTypes.TextSeenByPlayer;
+import Interpreter.InterpreterPrefixes;
 import SaveSystem.SaveSystem;
 
 public class DialogInterpreter {

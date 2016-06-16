@@ -6,6 +6,10 @@ import Entity.Main.EntityManager;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Main.EventManager;
+import Interpreter.Dialog.DialogInterpreter;
+import Interpreter.Room.RoomInterpreter;
+import Interpreter.Room.RoomPrefixes;
+import RoomEngine.Main.Room;
 import SaveSystem.SaveSystem;
 
 public class StoryInterpreter {
@@ -15,6 +19,7 @@ public class StoryInterpreter {
 	private SaveSystem reader;
 	private DialogInterpreter diin;
 	private int errorCounter;
+	private RoomInterpreter roin;
 	
 	public StoryInterpreter(String filePath) {
 		this.pathFile = filePath;
@@ -168,8 +173,43 @@ public class StoryInterpreter {
 		System.out.println("StoryInterpreter: tried to create " + lines.length + " Dialogs - failed: " + errorCounter);
 	}
 	
+	private void buildRoom(){
+		int[] lines = reader.getPrefixLinePositions(RoomPrefixes.addRoom + ":");
+		String[] args;
+		for(int i = 0; i < lines.length; i++){			
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(EntityManager.getEntity(args[1]) != null){
+				try {
+					Room room = (Room) EntityManager.getEntity(args[1]);
+					roin = new RoomInterpreter(args[1], args[2]);
+					if(roin.isValidPath()){
+						syma.getRoomManager().addRoom(args[1]);
+						roomInterpreter();
+					}else{
+						errorCounter ++;
+						System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unvalid Path");
+					}					
+				} catch (Exception e) {
+					errorCounter ++;
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Error while compiling Dialog for " + args[1]);
+				}
+				
+			}else{
+				errorCounter ++;
+				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unknown Entity");
+			}
+					
+		}
+		
+		System.out.println("StoryInterpreter: tried to create " + lines.length + " Dialogs - failed: " + errorCounter);
+	}
+	
 	private void dialogInterpreter() {
 		syma = diin.compileTo(syma);		
+	}
+	
+	private void roomInterpreter(){
+		syma = roin.compileTo(syma);
 	}
 
 	private boolean addEvent(String[] args){

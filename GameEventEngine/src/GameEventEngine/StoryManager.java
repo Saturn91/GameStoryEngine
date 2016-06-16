@@ -13,6 +13,7 @@ import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
 import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
 import GameEventEngine.Events.EventTypes.StartEvent;
 import GameEventEngine.Events.Main.EventManager;
+import RoomEngine.Main.RoomManager;
 
 public class StoryManager {
 	public static boolean testing = false;
@@ -20,16 +21,22 @@ public class StoryManager {
 	private ActionManager acma;
 	private DialogManager dima;
 	private EntityManager enma;
+	private RoomManager roma;
 	
 	public StoryManager() {
 		evma = new EventManager();
 		acma = new ActionManager();
 		dima = new DialogManager();
 		enma = new EntityManager();
+		roma = new RoomManager();
 	}
 	
 	public EventManager getEventManager(){
 		return evma;
+	}
+	
+	public RoomManager getRoomManager(){
+		return roma;
 	}
 	
 	public ActionManager getActionManager(){
