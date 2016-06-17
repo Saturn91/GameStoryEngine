@@ -49,6 +49,7 @@ public class StoryInterpreter {
 		buildEvents();
 		buildActions();
 		buildDialog();
+		buildRoom();
 	}
 
 	private void buildEntities(){
@@ -201,7 +202,22 @@ public class StoryInterpreter {
 					
 		}
 		
-		System.out.println("StoryInterpreter: tried to create " + lines.length + " Dialogs - failed: " + errorCounter);
+		lines = reader.getPrefixLinePositions(RoomPrefixes.setStartRoom + ":");
+		for(int i = 0; i < lines.length; i++){			
+			args = reader.loadLine(lines[i]).split(" |;");
+			if(args[1] != null){
+				if(!syma.getRoomManager().setStartRoom(args[1])){
+					errorCounter ++;
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unknown Room");
+				}				
+			}else{
+				errorCounter ++;
+				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " not enough Arguments");
+			}
+					
+		}
+		
+		System.out.println("StoryInterpreter: tried to create " + lines.length + " Rooms - failed: " + errorCounter);
 	}
 	
 	private void dialogInterpreter() {

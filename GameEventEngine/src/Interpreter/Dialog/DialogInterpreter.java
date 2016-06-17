@@ -69,9 +69,12 @@ public class DialogInterpreter {
 		for(int i = 0; i < lines.length; i++){	
 			countLines++;
 			args = reader.loadLine(lines[i]).split(" |;");
-			if(!addEvent(args)){
+			Event event = EventInterpreter.addEvent(args);
+			if(event == null){
 				errorCounter ++;
 				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument");
+			}else{
+				watchEvents.add(event);
 			}
 					
 		}
@@ -173,7 +176,7 @@ public class DialogInterpreter {
 		return Event.getEventByName(name);
 	}
 	
-	private boolean addEvent(String[] args){
+	/*private boolean addEvent(String[] args){
 		try {
 			switch(args[1]){
 				case "InInventory": {
@@ -204,5 +207,5 @@ public class DialogInterpreter {
 		} catch (Exception e) {
 			return false;
 		}
-	}
+	}*/
 }
