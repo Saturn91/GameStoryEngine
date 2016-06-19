@@ -89,7 +89,11 @@ public class StoryController {
 	}
 	
 	public String getRoomName(){
-		return syma.getRoomManager().getRoomName();
+		if(syma.getRoomManager().getRoomName() != null){
+			return syma.getRoomManager().getRoomName();
+		}
+		System.err.println("StoryController: no actualRoom Defined!");
+		return null;
 	}
 	
 	public boolean takeFromInventory(String thingName){
