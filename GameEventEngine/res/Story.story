@@ -7,7 +7,8 @@ addThing: Key;
 addThing: Sword;
 addThing: Ring;
 
-addRoom: Room1;
+addRoom: Room1 ./res/Rooms/room1;
+addRoom: Room2 ./res/Rooms/room2;
 
 addEvent: InInventory E1 Player Dagger;
 addEvent: InInventory E2 Player Key;

@@ -49,7 +49,7 @@ public class RoomInterpreter {
 						errorCounter ++;
 						System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " unvalid RoomName <" + args[1] + ">");
 					}else{
-						if(!args[1].equals(roomName)){
+						if(args[1].equals(roomName)){
 							System.out.println("RoomInterpreter: [Warning] in Line: " + (lines[i]+1) + " of " + filePath + " room exit should not point back at it self");
 						}
 					}

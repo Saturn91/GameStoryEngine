@@ -179,29 +179,26 @@ public class StoryInterpreter {
 		String[] args;
 		for(int i = 0; i < lines.length; i++){	
 			args = reader.loadLine(lines[i]).split(" |;");
-			if(EntityManager.getEntity(args[1]) != null){
-				try {
-					Room room = (Room) EntityManager.getEntity(args[1]);
-					roin = new RoomInterpreter(args[1], args[2]);
-					if(roin.isValidPath()){
-						syma.getRoomManager().addRoom(args[1]);
+			try {
+				roin = new RoomInterpreter(args[1], args[2]);
+				if(roin.isValidPath()){
+					if(syma.getRoomManager().addRoom(args[1])){
 						roomInterpreter();
 					}else{
 						errorCounter ++;
-						System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unvalid Path");
-					}					
-				} catch (Exception e) {
-					errorCounter ++;
-					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Error while compiling Room <" + args[1] + ">");
-				}
-				
-			}else{
-				errorCounter ++;
-				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unknown Entity");
-			}
+						System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " room <" + args[1] + "> is already defined");
+					}
 					
+				}else{
+					errorCounter ++;
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unvalid Path");
+				}					
+			} catch (Exception e) {
+				errorCounter ++;
+				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Error while compiling Room <" + args[1] + ">");
+			}	
 		}
-		
+		int linescounter = lines.length;
 		lines = reader.getPrefixLinePositions(RoomPrefixes.setStartRoom + ":");
 		for(int i = 0; i < lines.length; i++){			
 			args = reader.loadLine(lines[i]).split(" |;");
@@ -216,8 +213,7 @@ public class StoryInterpreter {
 			}
 					
 		}
-		
-		System.out.println("StoryInterpreter: tried to create " + lines.length + " Rooms - failed: " + errorCounter);
+		System.out.println("StoryInterpreter: tried to create " + linescounter + " Rooms - failed: " + errorCounter);
 	}
 	
 	private void dialogInterpreter() {
