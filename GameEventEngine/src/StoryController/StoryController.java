@@ -88,6 +88,10 @@ public class StoryController {
 		}
 	}
 	
+	public String getRoomName(){
+		return syma.getRoomManager().getRoomName();
+	}
+	
 	public boolean takeFromInventory(String thingName){
 		return syma.getRoomManager().takeFromInventory(thingName);
 	}	
