@@ -135,6 +135,7 @@ public class RoomManager {
 	//
 	//************************* GoTo *******************************************
 	//
+	//TODO here is a bug, can't change rooms!
 	public boolean goTo(int direction){
 		if(getRoomByName(activRoom).getExit(direction) != null){
 			activRoom = getRoomByName(activRoom).getExit(direction);
