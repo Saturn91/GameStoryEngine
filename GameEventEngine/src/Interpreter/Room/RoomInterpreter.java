@@ -2,8 +2,7 @@ package Interpreter.Room;
 
 import GameEventEngine.StoryManager;
 import GameEventEngine.Events.Event.Event;
-import Interpreter.InterpreterPrefixes;
-import Interpreter.Dialog.EventInterpreter;
+import Interpreter.EventInterpreter;
 import SaveSystem.SaveSystem;
 
 public class RoomInterpreter {
@@ -28,6 +27,7 @@ public class RoomInterpreter {
 		this.syma = syma;
 		countLines = 0;
 		errorCounter = 0;
+		reader.readFile(filePath);
 		addExit();
 		addDescriptions();
 		addDescriptionStoryEventIF();
@@ -44,7 +44,6 @@ public class RoomInterpreter {
 			args = reader.loadLine(lines[i]).split(" |;");			
 			if(args.length >= 3){
 				try {
-				
 					if(!syma.getRoomManager().addExit(roomName, args[1], Integer.parseInt(args[2]))){
 						errorCounter ++;
 						System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " unvalid RoomName <" + args[1] + ">");
@@ -69,11 +68,13 @@ public class RoomInterpreter {
 	private void addDescriptions() {
 		int[] lines = reader.getPrefixLinePositions(RoomPrefixes.addDescription + ":");
 		String[] args;
+		String[] cmds;
 		for(int i = 0; i < lines.length; i++){
 			countLines++;
-			args = reader.loadLine(lines[i]).split(" |;");			
-			if(args.length >= 3){
-					if(!syma.getRoomManager().addDescription(roomName, args[1], args[2])){
+			cmds = reader.loadLine(lines[i]).split("\"|;");	
+			args = cmds[0].split(" ");
+			if(args.length >= 2){
+					if(!syma.getRoomManager().addDescription(roomName, args[1], cmds[1])){
 						errorCounter ++;
 						System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " see details in RoomManager");
 					}				
@@ -90,25 +91,20 @@ public class RoomInterpreter {
 		for(int i = 0; i < lines.length; i++){	
 			countLines++;
 			args = reader.loadLine(lines[i]).split(" |;");
-			Event event = EventInterpreter.addEvent(args, 3);
+			Event event = EventInterpreter.addEvent(args, 2);
 			if(event == null){
 				errorCounter ++;
-				System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument");
+				System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument");
 			}else{
 				boolean error1 = false;
-				boolean error2 = false;
 				if(args[2].equals("true")){
 					if(!syma.getRoomManager().addDescriptionWatchEventIF(roomName, args[1], event, true)){
 						error1 = true;
-					}else{
-						error2 = true;
 					}
 				}else{
 					if(args[2].equals("false")){
 						if(!syma.getRoomManager().addDescriptionWatchEventIF(roomName, args[1], event, false)){
 							error1 = true;
-						}else{
-							error2 = true;
 						}
 					}
 						
@@ -116,12 +112,7 @@ public class RoomInterpreter {
 				
 				if(error1){
 					errorCounter ++;
-					System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument <" + args[2] + "> must be true or false");
-				}
-				
-				if(error2){
-					errorCounter ++;
-					System.err.println("DialogInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument <" + args[2] + "> wrong argument");
+					System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " Invalid Argument <" + args[2] + "> must be true or false");
 				}
 				
 			}

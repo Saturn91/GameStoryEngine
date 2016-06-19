@@ -8,6 +8,7 @@ import GameEventEngine.Events.EventTypes.DeathOfEntity;
 import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
 import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
 import GameEventEngine.Events.EventTypes.TextSeenByPlayer;
+import Interpreter.EventInterpreter;
 import Interpreter.InterpreterPrefixes;
 import SaveSystem.SaveSystem;
 

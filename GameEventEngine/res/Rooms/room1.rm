@@ -1,2 +1,8 @@
-addExit: Room1 1;
-addExit: Room2 2;
+addDescription: Desc1 "A very big dark and cool Hall opens before you. In The Corners a few Torches try to make the play more iluminated, but its light can't touch the Celling wich remains in darkness.";
+addDescription: Desc2 "The Door at the End is open!";
+addDescription: Desc3 "The Door at the End is closed!";
+addDescription: Desc4 "Something is vibrating in your pocket...";
+
+addDescriptionStoryEventIF: Desc2 E3 false;
+addDescriptionStoryEventIF: Desc2 E3 true;
+addDescriptionWatchEventIF: Desc4 true InInventory E100 Player Dagger 

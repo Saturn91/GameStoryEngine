@@ -1,4 +1,4 @@
-package RoomEngine.Main;
+package GameEventEngine.Rooms.Main;
 
 import java.util.ArrayList;
 
@@ -77,7 +77,7 @@ public class Room extends Thing{
 	
 	public boolean setDescriptionStoryEventIF(String descriptionName, String eventName, boolean flag){
 		if(descriptionNames.contains(descriptionName)){
-			descriptions.get(descriptionNames.indexOf(descriptionName)).setEvent(Event.getEventByName(eventName), flag);
+			descriptions.get(descriptionNames.indexOf(descriptionName)).setEvent(Event.getEventByName(eventName), !flag);
 			return true;
 		}else{
 			System.err.println("Rooms: <" + descriptionName + "> is not a valuable Description-Name!");
@@ -90,7 +90,7 @@ public class Room extends Thing{
 		if(descriptionNames.contains(descriptionName)){
 			Event.setEventStatus(event.getName(), Event_Status.ACTIVE);
 			watchevents.add(event);
-			descriptions.get(descriptionNames.indexOf(descriptionName)).setEvent(event, flag);
+			descriptions.get(descriptionNames.indexOf(descriptionName)).setEvent(event, !flag);
 			return true;
 		}else{
 			System.err.println("Rooms: <" + descriptionName + "> is not a valuable Description-Name!");
@@ -111,6 +111,12 @@ public class Room extends Thing{
 	@Override
 	public String getName(){
 		return this.roomName;
+	}
+	
+	public void update(){
+		for(Event e: watchevents){
+			e.update();
+		}
 	}
 	
 	private class Description{

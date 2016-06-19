@@ -1,4 +1,4 @@
-package Interpreter.Dialog;
+package Interpreter;
 
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.EventTypes.DeathOfEntity;
@@ -31,6 +31,7 @@ public class EventInterpreter {
 				}
 			}
 		} catch (Exception e) {
+			System.err.println("EventInterpreter: unexpected argument!");
 			return null;
 		}
 	}

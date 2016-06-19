@@ -1,15 +1,17 @@
 package Interpreter;
 
+import java.util.ArrayList;
+
 import Entites.EntityTypes.Creature;
 import Entites.EntityTypes.Thing;
 import Entity.Main.EntityManager;
 import GameEventEngine.StoryManager;
 import GameEventEngine.Events.Event.Event;
 import GameEventEngine.Events.Main.EventManager;
+import GameEventEngine.Rooms.Main.Room;
 import Interpreter.Dialog.DialogInterpreter;
 import Interpreter.Room.RoomInterpreter;
 import Interpreter.Room.RoomPrefixes;
-import RoomEngine.Main.Room;
 import SaveSystem.SaveSystem;
 
 public class StoryInterpreter {
@@ -20,6 +22,7 @@ public class StoryInterpreter {
 	private DialogInterpreter diin;
 	private int errorCounter;
 	private RoomInterpreter roin;
+	private ArrayList<String> roomNames;
 	
 	public StoryInterpreter(String filePath) {
 		this.pathFile = filePath;
@@ -175,24 +178,31 @@ public class StoryInterpreter {
 	}
 	
 	private void buildRoom(){
+		roomNames = new ArrayList<>();
 		int[] lines = reader.getPrefixLinePositions(RoomPrefixes.addRoom + ":");
 		String[] args;
+		for(int i = 0; i < lines.length; i++){
+			args = reader.loadLine(lines[i]).split(" |;");
+			roin = new RoomInterpreter(args[1], args[2]);
+			if(!roomNames.contains(args[1])){
+				if(roin.isValidPath()){
+					roomNames.add(args[1]);
+					syma.getRoomManager().addRoom(args[1]);
+				}else{
+					errorCounter ++;
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unvalid Path");
+				}
+			}else{
+				errorCounter ++;
+				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " <" + args[1] + "> is already defined as a room");
+			}
+		}
+		
 		for(int i = 0; i < lines.length; i++){	
 			args = reader.loadLine(lines[i]).split(" |;");
 			try {
 				roin = new RoomInterpreter(args[1], args[2]);
-				if(roin.isValidPath()){
-					if(syma.getRoomManager().addRoom(args[1])){
-						roomInterpreter();
-					}else{
-						errorCounter ++;
-						System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " room <" + args[1] + "> is already defined");
-					}
-					
-				}else{
-					errorCounter ++;
-					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " unvalid Path");
-				}					
+				roomInterpreter();					
 			} catch (Exception e) {
 				errorCounter ++;
 				System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Error while compiling Room <" + args[1] + ">");

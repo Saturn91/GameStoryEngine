@@ -13,7 +13,7 @@ import GameEventEngine.Events.EventTypes.EntityGetsToPosition;
 import GameEventEngine.Events.EventTypes.EntityHasInInvetory;
 import GameEventEngine.Events.EventTypes.StartEvent;
 import GameEventEngine.Events.Main.EventManager;
-import RoomEngine.Main.RoomManager;
+import GameEventEngine.Rooms.Main.RoomManager;
 
 public class StoryManager {
 	public static boolean testing = false;
@@ -57,6 +57,7 @@ public class StoryManager {
 		
 		//modify gameWorld with actions
 		acma.update();
+		roma.update();
 	}
 	
 	public void printStatus(){

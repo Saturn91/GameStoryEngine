@@ -1,4 +1,4 @@
-package RoomEngine.Main;
+package GameEventEngine.Rooms.Main;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import GameEventEngine.Events.Event.Event;
 
 public class RoomManager {
 	private ArrayList<Room> rooms;
-	private ArrayList<String> roomNames;
+	private static ArrayList<String> roomNames;
 	private String activRoom;
 	
 	//
@@ -20,7 +20,6 @@ public class RoomManager {
 	public boolean addRoom(String name){
 		if(!roomNames.contains(name)){
 			rooms.add(new Room(name));
-			roomNames.add(name);
 			return true;
 		}else{
 			System.err.println("RoomManager: <" + name + "> is already defined as a Room!");
@@ -151,5 +150,21 @@ public class RoomManager {
 		}
 		System.err.println("RoomManager: <" + roomName + "> is not a valuable RoomName");
 		return null;
+	}
+	
+	//
+	//************************Debug ************************************
+	//
+	
+	public void debug(){
+		for(String s: roomNames){
+			System.out.println(s);
+		}
+	}
+	
+	public void update(){
+		for(Room r: rooms){
+			r.update();
+		}
 	}
 }
