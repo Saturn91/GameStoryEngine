@@ -41,7 +41,7 @@ public class StoryInterpreter {
 		System.out.println("----------------------------------------------");
 		System.out.println("|                Interpreter:                 |");
 		System.out.println("|             TextAdventure-Version           |");
-		System.out.println("|      StoryEngine-Version: Beta_0_0_1        |");
+		System.out.println("|      StoryEngine-Version: Beta_0_0_2        |");
 		System.out.println("|                                             |");
 		System.out.println("|             created by Saturn91             |");
 		System.out.println("|                                             |");
