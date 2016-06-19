@@ -51,7 +51,7 @@ public class Room extends Thing{
 		sb.setLength(0);
 		for(Description d: descriptions){
 			if(d.isActive){
-				sb.append(d.getText());
+				sb.append(d.getText() + " ");
 			}
 		}
 		return sb.toString();
