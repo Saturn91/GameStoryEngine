@@ -177,7 +177,7 @@ public class StoryInterpreter {
 	private void buildRoom(){
 		int[] lines = reader.getPrefixLinePositions(RoomPrefixes.addRoom + ":");
 		String[] args;
-		for(int i = 0; i < lines.length; i++){			
+		for(int i = 0; i < lines.length; i++){	
 			args = reader.loadLine(lines[i]).split(" |;");
 			if(EntityManager.getEntity(args[1]) != null){
 				try {
@@ -192,7 +192,7 @@ public class StoryInterpreter {
 					}					
 				} catch (Exception e) {
 					errorCounter ++;
-					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Error while compiling Dialog for " + args[1]);
+					System.err.println("StoryInterpreter: Error in Line: " + (lines[i]+1) + " Error while compiling Room <" + args[1] + ">");
 				}
 				
 			}else{
