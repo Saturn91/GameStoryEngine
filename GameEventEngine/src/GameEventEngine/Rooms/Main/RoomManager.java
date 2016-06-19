@@ -123,9 +123,12 @@ public class RoomManager {
 		}
 	}
 	
-	public void takeFromInventory(String roomName, String thingName){
-		if(getRoomByName(roomName)!= null){
-			getRoomByName(roomName).takefromInventory(thingName);
+	public boolean takeFromInventory(String thingName){
+		if(getRoomByName(activRoom)!= null){
+			getRoomByName(activRoom).takefromInventory(thingName);
+			return true;
+		}else{
+			return false;
 		}
 	}
 	

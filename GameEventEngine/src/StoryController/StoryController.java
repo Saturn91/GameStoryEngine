@@ -69,5 +69,26 @@ public class StoryController {
 	
 	public void setUpdateTime(long updateTime){
 		this.updateTime = updateTime;
+	}
+	
+	//**********************Room-Controlls *********************
+	public String[] getRoomExits(){
+		return syma.getRoomManager().getExits();
+	}
+	
+	public String getRoomDescription(){
+		return syma.getRoomManager().getRoomDescription();
+	}
+	
+	public boolean goTo(int direction){
+		if(syma.getRoomManager().goTo(direction)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean takeFromInventory(String thingName){
+		return syma.getRoomManager().takeFromInventory(thingName);
 	}	
 }
