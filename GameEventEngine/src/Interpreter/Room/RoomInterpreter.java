@@ -131,7 +131,33 @@ public class RoomInterpreter {
 	}
 
 	private void addDescriptionStoryEventIF() {
-		// TODO Auto-generated method stub
-		
+		int[] lines = reader.getPrefixLinePositions(RoomPrefixes.addDescriptionStoryEventIF + ":");
+		String[] args;
+		for(int i = 0; i < lines.length; i++){
+			countLines++;
+			args = reader.loadLine(lines[i]).split(" |;");			
+			if(args.length >= 3){
+				if(args[3].equals("true")){
+					if(!syma.getRoomManager().addDescriptionStoryEventIF(roomName, args[1], args[2], true)){
+						errorCounter ++;
+						System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " see details in RoomManager");
+					}
+				}else{
+					if(args[3].equals("false")){
+						if(!syma.getRoomManager().addDescriptionStoryEventIF(roomName, args[1], args[2], false)){
+							errorCounter ++;
+							System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " see details in RoomManager");
+						}
+					}else{
+						errorCounter ++;
+						System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " argument 3 <" + args[3]+ "> must be true/false");
+					}
+				}
+									
+			}else{
+				errorCounter ++;
+				System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " need at least 2 argument");
+			}
+		}		
 	}
 }
