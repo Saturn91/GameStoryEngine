@@ -35,8 +35,6 @@ public class StoryInterpreter {
 		return syma;
 	}
 	
-	//TODO: add RoomManager! Generate a room generating syntax!
-
 	private void buildStoryManager() {
 		System.out.println("----------------------------------------------");
 		System.out.println("|                Interpreter:                 |");
