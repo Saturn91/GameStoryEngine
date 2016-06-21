@@ -1,5 +1,6 @@
 package StoryController;
 
+import Entites.EntityTypes.Creature;
 import Entites.EntityTypes.Entity;
 import Entity.Main.EntityManager;
 import GameEventEngine.StoryManager;
@@ -37,6 +38,10 @@ public class StoryController {
 		if(nowTime - lastTime >= updateTime){
 			syma.update();
 		}		
+	}
+	
+	public void addPlayer(String playerName){
+		syma.getEntityManager().addEntity(new Creature(playerName, 0));
 	}
 	
 	public void openDialog(String creatureName){
