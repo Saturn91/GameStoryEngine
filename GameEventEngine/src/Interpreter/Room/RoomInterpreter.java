@@ -32,6 +32,7 @@ public class RoomInterpreter {
 		addDescriptions();
 		addDescriptionStoryEventIF();
 		addDescriptionWatchEventIF();
+		addThing();
 		System.out.println("RoomInterpreter: tried to compile " + countLines + " Commands for " + roomName + " - failed: " + errorCounter);		
 		return this.syma;
 	}
@@ -151,4 +152,22 @@ public class RoomInterpreter {
 			}
 		}		
 	}
+	
+	private void addThing() {
+		int[] lines = reader.getPrefixLinePositions(RoomPrefixes.addThing + ":");
+		String[] args;
+		for(int i = 0; i < lines.length; i++){
+			countLines++;
+			args = reader.loadLine(lines[i]).split(" |;");	
+			if(args.length >= 2){
+					if(!syma.getRoomManager().addThing(roomName, args[1])){
+						errorCounter ++;
+						System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " of " + filePath + " see details in RoomManager");
+					}				
+			}else{
+				errorCounter ++;
+				System.err.println("RoomInterpreter: Error in Line: " + (lines[i]+1) + " need at least 2 argument");
+			}
+		}		
+	}	
 }

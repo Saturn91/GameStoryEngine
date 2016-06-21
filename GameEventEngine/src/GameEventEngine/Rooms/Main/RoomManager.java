@@ -3,6 +3,7 @@ package GameEventEngine.Rooms.Main;
 import java.util.ArrayList;
 
 import Entites.EntityTypes.Entity;
+import Entity.Main.EntityManager;
 import GameEventEngine.Events.Event.Event;
 
 public class RoomManager {
@@ -48,6 +49,16 @@ public class RoomManager {
 		}else{
 			return false;
 		}
+	}
+	
+	public boolean addThing(String roomName, String thingName){
+		if(EntityManager.getEntity(thingName) != null){
+			if(getRoomByName(roomName) != null){
+				getRoomByName(roomName).addToInventory(thingName);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	//
