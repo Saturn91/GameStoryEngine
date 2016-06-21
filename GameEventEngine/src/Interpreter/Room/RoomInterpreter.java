@@ -32,7 +32,7 @@ public class RoomInterpreter {
 		addDescriptions();
 		addDescriptionStoryEventIF();
 		addDescriptionWatchEventIF();
-		System.out.println("DialogInterpreter: tried to compile " + countLines + " Commands for " + roomName + " - failed: " + errorCounter);		
+		System.out.println("RoomInterpreter: tried to compile " + countLines + " Commands for " + roomName + " - failed: " + errorCounter);		
 		return this.syma;
 	}
 

@@ -48,9 +48,9 @@ public class Room extends Thing{
 	}
 	
 	public String getActiveDescriptions(){
-		sb.setLength(0);
+		sb = new StringBuilder();
 		for(Description d: descriptions){
-			if(d.isActive){
+			if(d.isActive()){
 				sb.append(d.getText() + " ");
 			}
 		}
@@ -121,7 +121,7 @@ public class Room extends Thing{
 	
 	private class Description{
 		private Event event;
-		private boolean isActive = true;
+		private boolean active = true;
 		private boolean listenTo;
 		private String text;
 		
@@ -146,7 +146,7 @@ public class Room extends Thing{
 					return !listenTo;
 				}
 			}else{
-				return isActive;
+				return active;
 			}			
 		}
 		
