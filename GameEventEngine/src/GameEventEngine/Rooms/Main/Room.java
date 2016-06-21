@@ -11,7 +11,7 @@ public class Room extends Thing{
 	private String[] exits = new String[4];
 	private String roomName;
 	private ArrayList<Description> descriptions = new ArrayList<>();
-	private static ArrayList<String> descriptionNames = new ArrayList<>();
+	private ArrayList<String> descriptionNames = new ArrayList<>();
 	private StringBuilder sb = new StringBuilder();
 	private ArrayList<Event> watchevents = new ArrayList<>();
 	
