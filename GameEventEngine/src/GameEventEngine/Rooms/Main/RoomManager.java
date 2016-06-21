@@ -2,6 +2,7 @@ package GameEventEngine.Rooms.Main;
 
 import java.util.ArrayList;
 
+import Entites.EntityTypes.Entity;
 import GameEventEngine.Events.Event.Event;
 
 public class RoomManager {
@@ -123,12 +124,11 @@ public class RoomManager {
 		}
 	}
 	
-	public boolean takeFromInventory(String thingName){
+	public Entity takeFromInventory(String thingName){
 		if(getRoomByName(activRoom)!= null){
-			getRoomByName(activRoom).takefromInventory(thingName);
-			return true;
+			return getRoomByName(activRoom).takefromInventory(thingName);
 		}else{
-			return false;
+			return null;
 		}
 	}
 	

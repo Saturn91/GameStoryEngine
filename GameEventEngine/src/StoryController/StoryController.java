@@ -101,7 +101,7 @@ public class StoryController {
 		return null;
 	}
 	
-	public boolean takeFromInventory(String thingName){
-		return syma.getRoomManager().takeFromInventory(thingName);
+	public boolean takeFromRoomInventory(String thingName){
+		return syma.getRoomManager().takeFromInventory(thingName)!=null;
 	}	
 }

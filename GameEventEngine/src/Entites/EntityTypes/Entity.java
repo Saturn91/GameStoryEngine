@@ -25,8 +25,12 @@ public class Entity {
 	}
 	
 	public Entity takefromInventory(String name){
-		inventory.remove(entitys.get((int) getIdOff(name)));
-		return entitys.get((int) getIdOff(name));
+		if(getIdOff(name) != -440){
+			inventory.remove(entitys.get((int) getIdOff(name)));
+			return entitys.get((int) getIdOff(name));
+		}else{
+			return null;
+		}
 	}
 	
 	public boolean hasinInventory(String name){
@@ -80,7 +84,7 @@ public class Entity {
 			}
 		}
 		System.err.println("Entity: no <" + name + "> found in entities!");
-		return -9;
+		return -440;
 	}
 	
 	public long getID(){
